@@ -143,12 +143,13 @@ decryption returns the plaintext `x`.
 >
 > Note that if a destructor function require several rewrite rules,
 > they should  be defined inside the same reduc.
+>
 > ```{.deepsec}
-   reduc
-      exists_double(x,x,y) -> ok;
-      exists_double(x,y,x) -> ok;
-      exists_double(y,x,x) -> ok.
-  ```
+>   reduc
+>      exists_double(x,x,y) -> ok;
+>      exists_double(x,y,x) -> ok;
+>      exists_double(y,x,x) -> ok.
+>  ```
 
 
 
@@ -301,7 +302,7 @@ To verify this query we use the command
 by outputting (among some other messages) that
 
 ```bash
-Result query 1: The two processes are not trace equivalent.
+Result query 1: The two processes are trace equivalent.
 ```
 
 Looking at the protocol this is intuitively due to the decoy message
@@ -328,7 +329,10 @@ reply.
 > **Note:** multiple input files
 >
 > **deepsec** can take several files as input. For example you may run
-> `deepsec pap-1-session.dps pap-1-session-attack.dps`.
+> 
+> ```.bash
+>    deepsec pap-1-session.dps pap-1-session-attack.dps
+> ```
 
 
 ### More complex scenarios and scaling up
@@ -373,14 +377,17 @@ let ProcessCB =
 > provides a convenient operator `!^n`: `!^n P` is syntactic sugar for
 > `n` parallel copies of $P$ where `n` is a positive integer. In the
 > above example
+>
 > ```{.deepsec}
-    processA(ska,pk(skb)) | processB(skb,pk(ska)) |
-    processA(ska,pk(skb)) | processB(skb,pk(ska))
-  ```
+>    processA(ska,pk(skb)) | processB(skb,pk(ska)) |
+>    processA(ska,pk(skb)) | processB(skb,pk(ska))
+>  ```
+>
 > could have been replaced by 
+>
 > ```{.deepsec}
-    !^2 processA(ska,pk(skb)) | !^2 processB(skb,pk(ska))
-  ```
+>    !^2 processA(ska,pk(skb)) | !^2 processB(skb,pk(ska))
+>  ```
 
 
 
@@ -501,16 +508,18 @@ improve the verification time.
 >be true, and equivalence by session may lead to a _false attack_
 >(with respect to trace equivalence). This is witnessed by the
 >following small example
+>
 > ```{.deepsec}
-    let P = out(c,a) ; out(c,a).
-    let Q = out(c,a) | out(c,a).
-	query trace_equiv(P,Q).
-	query session_equiv(P,Q).
-  ```
+>   let P = out(c,a) ; out(c,a).
+>   let Q = out(c,a) | out(c,a).
+>	query trace_equiv(P,Q).
+>	query session_equiv(P,Q).
+>  ```
 > and can be tested using **deepsec**.
+>
 > ```.bash
-    $ deepsec trace-vs-session.dps 
-  ```
+>    $ deepsec trace-vs-session.dps 
+>  ```
 
 
 
@@ -683,8 +692,8 @@ frame.
 You may also try to see what happens if you use a different recipe for
 `in(c,yb)`:
 
-```{.deepsec}
-aenc((#n,ax_1),ax_2)
+```
+	aenc((#n,ax_1),ax_2)
 ```
 
 In this recipe the attacker encrypts himself a fresh name `#n` of his

@@ -158,10 +158,10 @@
 <blockquote>
 <p><strong>Note</strong>: multiple rewrite rules for a single destructor.</p>
 <p>Note that if a destructor function require several rewrite rules, they should be defined inside the same reduc.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">reduc</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>exists_double(x,x,y) -&gt; ok;</span>
-<span id="cb6-3"><a href="#cb6-3"></a>exists_double(x,y,x) -&gt; ok;</span>
-<span id="cb6-4"><a href="#cb6-4"></a>exists_double(y,x,x) -&gt; ok.</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="kw">reduc</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>     exists_double(x,x,y) -&gt; ok;</span>
+<span id="cb6-3"><a href="#cb6-3"></a>     exists_double(x,y,x) -&gt; ok;</span>
+<span id="cb6-4"><a href="#cb6-4"></a>     exists_double(y,x,x) -&gt; ok.</span></code></pre></div>
 </blockquote>
 <h3 id="modelling-protocols-as-processes">Modelling protocols as processes</h3>
 <p>We now need to model the behaviour of Alice and Bob. One can think of a protocol as a distributed program. Each local program of this system will be represented by a <em>process</em>. We can model Alice’s role by the following process <code>processA</code>.</p>
@@ -217,7 +217,7 @@
 <p>To verify this query we use the command</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a>  $ <span class="ex">deepsec</span> pap-1-session.dps</span></code></pre></div>
 <p><strong>deepsec</strong> will indeed confirm that this kind of anonymity is satisfied by outputting (among some other messages) that</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">Result</span> query 1: The two processes are not trace equivalent.</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">Result</span> query 1: The two processes are trace equivalent.</span></code></pre></div>
 <p>Looking at the protocol this is intuitively due to the decoy message sent in the <code>else</code> branch of <code>processB</code>. What happens when we remove the decoy message? For this we simply replace the else branch with <code>else 0</code> (or omit it completely), see the file <code>PrivateAuthentication-1session-attack.dps</code>. We can now run <strong>deepsec</strong> on this modified file.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a>  $ <span class="ex">deepsec</span> pap-1-session-attack.dps</span></code></pre></div>
 <p>This time, <strong>deepsec</strong> will report an attack:</p>
@@ -225,48 +225,49 @@
 <p>Indeed, when the attacker sends the message <code>aenc((n,pk(ska)),pk(skb))</code> to B, only the first system will send a reply.</p>
 <blockquote>
 <p><strong>Note:</strong> multiple input files</p>
-<p><strong>deepsec</strong> can take several files as input. For example you may run <code>deepsec pap-1-session.dps pap-1-session-attack.dps</code>.</p>
+<p><strong>deepsec</strong> can take several files as input. For example you may run</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a>   <span class="ex">deepsec</span> pap-1-session.dps pap-1-session-attack.dps</span></code></pre></div>
 </blockquote>
 <h3 id="more-complex-scenarios-and-scaling-up">More complex scenarios and scaling up</h3>
 <p>In the previous section we considered a very simple scenario and our verification checked whether private authentication holds when we have one instance of <code>A</code> and <code>B</code>. Often, protocols may be secure when considering a single session, but attacks may arise when multiple sessions are executed in parallel.</p>
 <p>Let us see what happens when we consider two instances of each role resulting into the following declarations.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb17-1"><a href="#cb17-1"></a><span class="st">let</span> ProcessAB =</span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="st">out</span>(c,pk(ska));</span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="st">out</span>(c,pk(skb));</span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="st">out</span>(c,pk(skc));</span>
-<span id="cb17-5"><a href="#cb17-5"></a>  (</span>
-<span id="cb17-6"><a href="#cb17-6"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska)) | <span class="co">// B expects to talk to A</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a>  ).</span>
-<span id="cb17-9"><a href="#cb17-9"></a></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="st">let</span> ProcessCB =</span>
-<span id="cb17-11"><a href="#cb17-11"></a>  <span class="st">out</span>(c,pk(ska));</span>
-<span id="cb17-12"><a href="#cb17-12"></a>  <span class="st">out</span>(c,pk(skb));</span>
-<span id="cb17-13"><a href="#cb17-13"></a>  <span class="st">out</span>(c,pk(skc));</span>
-<span id="cb17-14"><a href="#cb17-14"></a>  (</span>
-<span id="cb17-15"><a href="#cb17-15"></a>    processA(skc,pk(skb)) | processB(skb,pk(skc)) | <span class="co">// B expects to talk to C</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a>  ).</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb18-1"><a href="#cb18-1"></a><span class="st">let</span> ProcessAB =</span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb18-5"><a href="#cb18-5"></a>  (</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska)) | <span class="co">// B expects to talk to A</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>  ).</span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="st">let</span> ProcessCB =</span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb18-14"><a href="#cb18-14"></a>  (</span>
+<span id="cb18-15"><a href="#cb18-15"></a>    processA(skc,pk(skb)) | processB(skb,pk(skc)) | <span class="co">// B expects to talk to C</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a>  ).</span></code></pre></div>
 <blockquote>
 <p>Note: bounded replication</p>
 <p>When considering multiple sessions it is common to put in parallel several identical instances. For example, the process <code>ProcessAB</code> duplicates <code>processA(ska,pk(skb))</code> and <code>processB(skb,pk(ska))</code>. In more complex scenarios we may want to copy more processes a large number of times. Therefore <strong>deepsec</strong> provides a convenient operator <code>!^n</code>: <code>!^n P</code> is syntactic sugar for <code>n</code> parallel copies of <span class="math inline"><em>P</em></span> where <code>n</code> is a positive integer. In the above example</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb18-1"><a href="#cb18-1"></a>processA(ska,pk(skb)) | processB(skb,pk(ska)) |</span>
-<span id="cb18-2"><a href="#cb18-2"></a>processA(ska,pk(skb)) | processB(skb,pk(ska))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb19-1"><a href="#cb19-1"></a>   processA(ska,pk(skb)) | processB(skb,pk(ska)) |</span>
+<span id="cb19-2"><a href="#cb19-2"></a>   processA(ska,pk(skb)) | processB(skb,pk(ska))</span></code></pre></div>
 <p>could have been replaced by</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb19-1"><a href="#cb19-1"></a>!^<span class="dv">2</span> processA(ska,pk(skb)) | !^<span class="dv">2</span> processB(skb,pk(ska))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb20-1"><a href="#cb20-1"></a>   !^<span class="dv">2</span> processA(ska,pk(skb)) | !^<span class="dv">2</span> processB(skb,pk(ska))</span></code></pre></div>
 </blockquote>
 <p>We can run</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a>  $ <span class="ex">deepsec</span> pap-2-session.dps</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a>  $ <span class="ex">deepsec</span> pap-2-session.dps</span></code></pre></div>
 <p>and observe that still no attack is found. However, the verification time increases: while the result is instantaneous for 1 session it now takes several seconds on a standard laptop. This is due to the fact that <strong>deepsec</strong> has to explore <strong>all</strong> possible interleavings, whose number is exponential.</p>
 <p>While the verification time is still moderate for 2 sessions this is not the case anymore when we add a third session.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a>  $ <span class="ex">deepsec</span> pap-3-session.dps</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a>  $ <span class="ex">deepsec</span> pap-3-session.dps</span></code></pre></div>
 <p>will take <em>much</em> longer. How can we ensure that the protocol cannot be attacked with 3 sessions, or more?</p>
 <h4 id="distributing-the-computation">Distributing the computation</h4>
 <p>A first way to scale up is to distribute the computation. By default, <strong>deepsec</strong> checks how many physical cores your machine has and distributes the computation on these cores by creating the same amount of <em>workers</em>. To activate the distributed computation with a different number of workers, <code>deepsec</code> should be run with the option <code>-l n</code> (or <code>--local_workers n</code>) where <code>n</code> is the number of desired local workers.</p>
 <p>It is also possible to distribute computation on several machines. To do so, deepsec requires an ssh connexion between the localhost and the distant machine, using ssh key authentication, so that no password is required. The computation on a distant machine is configured with the command line option <code>-w &lt;host&gt; &lt;path&gt; &lt;n&gt;</code> (or <code>--distant_workers &lt;host&gt; &lt;path&gt; &lt;n&gt;</code>). The parameter <code>&lt;host&gt;</code> is the ssh login and address (e.g my_login@my_host). The parameter <code>&lt;path&gt;</code> should indicate the path to the deepsec directory on the distant machine. Finally, the parameter <code>&lt;n&gt;</code> represents the number of cores that should be dedicated by this distant machine to the computation of the input file.</p>
 <p>Note that the option <code>-distant_workers</code> must be used for each distant machine.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">deepsec</span> -w login1@host1 tools/deepsec 15 \</span>
-<span id="cb22-2"><a href="#cb22-2"></a>        -w login2@host2 deepsec auto my_file.dps</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">deepsec</span> -w login1@host1 tools/deepsec 15 \</span>
+<span id="cb23-2"><a href="#cb23-2"></a>        -w login2@host2 deepsec auto my_file.dps</span></code></pre></div>
 <p>In this command line, the first machine should be accessible with <code>ssh login1@host1</code> and the <strong>deepsec</strong> directory should be located at <code>~/tools/deepsec</code> on this machine. Similarly, the second machine should be accessible with <code>ssh login2@host1</code> and the <strong>deepsec</strong> directory should be located at <code>~/deepsec</code>. If the connexions to both machines are successful, <strong>deepsec</strong> will distribute the computation between the local and the 2 distant machines: 15 cores are used on the first machine and, by specifying <code>auto</code>, all available physical cores on the second machine.</p>
 <blockquote>
 <p><strong><em>Important</em></strong>: The localhost and distant machines must have exactly the same version of <strong>deepsec</strong> (the Git hash is displayed when running <code>deepsec</code> without parameters or with the option <code>--help</code>), compiled with the same version of <strong>OCaml</strong>.</p>
@@ -274,21 +275,21 @@
 <h4 id="session-equivalence">Session equivalence</h4>
 <p>Distribution of the computation may gain a constant speed-up factor: going from a 20 hours computation to a 1 hour computation is indeed much appreciated, but may not solve the more fundamental problem of the exponential blowup.</p>
 <p>This is why <strong>deepsec</strong> proposes another, more efficient proof technique. The underlying idea is to prove a stronger equivalence relation, that we call <em>equivalence by session</em>. This equivalence significantly decreases the number of interleavings and exploits the structure of the processes. Often, we want to show the equivalence of processes that are of the form</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb23-1"><a href="#cb23-1"></a>   <span class="st">let</span> P = P1 | ... | Pn</span>
-<span id="cb23-2"><a href="#cb23-2"></a>   <span class="st">let</span> Q = Q1 | ... | Qn</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb24-1"><a href="#cb24-1"></a>   <span class="st">let</span> P = P1 | ... | Pn</span>
+<span id="cb24-2"><a href="#cb24-2"></a>   <span class="st">let</span> Q = Q1 | ... | Qn</span></code></pre></div>
 <p>The rough idea of equivalence by sessions is to match parallel sessions rather than individual actions. Here, for instance, one may try to match all actions of <code>P1</code> by all actions of say <code>Q3</code>, all actions of <code>P2</code> by all actions of <code>Q1</code>, etc. <strong>deepsec</strong> still needs to explore all possible matches, but this equivalence allows many more optimizations than the initial trace equivalence.</p>
 <p>For example, we may try to verify a complex scenario with 5 sessions on PAP.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a>$ <span class="ex">deepsec</span> pap-session-equiv-5-sessions.dps </span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a>$ <span class="ex">deepsec</span> pap-session-equiv-5-sessions.dps </span></code></pre></div>
 <p>Now this computation terminates in about a minute on a standard laptop (with two cores). Distributing this computation could of course improve the verification time.</p>
 <blockquote>
 <p><strong>Note:</strong> Equivalence by session and false attacks</p>
 <p>Why shouldn’t one always use the more efficient equivalence by session ? As explained above equivalence by session is a stronger equivalence than trace equivalence. Therefore whenever equivalence by session is satisfied, trace equivalence also holds. The converse may however not be true, and equivalence by session may lead to a <em>false attack</em> (with respect to trace equivalence). This is witnessed by the following small example</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb25-1"><a href="#cb25-1"></a><span class="st">let</span> P = <span class="st">out</span>(c,a) ; <span class="st">out</span>(c,a).</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="st">let</span> Q = <span class="st">out</span>(c,a) | <span class="st">out</span>(c,a).</span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">query</span> <span class="kw">trace_equiv</span>(P,Q).</span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">query</span> <span class="kw">session_equiv</span>(P,Q).</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb26-1"><a href="#cb26-1"></a>  <span class="st">let</span> P = <span class="st">out</span>(c,a) ; <span class="st">out</span>(c,a).</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="st">let</span> Q = <span class="st">out</span>(c,a) | <span class="st">out</span>(c,a).</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="kw">query</span> <span class="kw">trace_equiv</span>(P,Q).</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="kw">query</span> <span class="kw">session_equiv</span>(P,Q).</span></code></pre></div>
 <p>and can be tested using <strong>deepsec</strong>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a>$ <span class="ex">deepsec</span> trace-vs-session.dps </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a>   $ <span class="ex">deepsec</span> trace-vs-session.dps </span></code></pre></div>
 </blockquote>
 <blockquote>
 <p><strong>Note:</strong> Syntactic restriction</p>
@@ -297,7 +298,7 @@
 <h4 id="partial-order-reduction-techniques">Partial-order reduction techniques</h4>
 <p>Probably the most effective way to fight state explosion are partial order reduction (POR) techniques. <strong>Deepsec</strong> implements powerful POR optimizations, that were designed in <span class="citation" data-cites="BDH-concur15">[2]</span>. These techniques are however only sound on a class of <em>action-determinate</em> processes: a process is action determinate when it never can reach a state where two outputs, or two inputs on a same channel are executable. Moreover, the processes may not use <em>private</em> channels. A simple, sufficient criterion is to check that syntactically no outputs on a same channel appear in parallel, and similarly for inputs, and that all channels are public. <strong>Deepsec</strong> automatically checks this criterion, and when satisfied enables POR techniques.</p>
 <p>A pragmatic way to ensure action determinacy is to use a different channel name for each process in parallel. It is easy to modify the specification of PAP in that way. This modelling allows for a spectacular efficiency gain. The verification of a scenario with 9 sessions terminates in a few seconds.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a>   $ <span class="ex">deepsec</span> pap-por-9-sessions.dps</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a>   $ <span class="ex">deepsec</span> pap-por-9-sessions.dps</span></code></pre></div>
 <p>Again, one may wonder why one should not always use different channel names for parallel processes? Intuitively, using different channels for parallel sessions allows the attacker to identify the session that has sent the message. While this works well for the PAP protocol, some protocols precisely rely on this <em>sender ambiguity</em> to ensure some form of anonymity.</p>
 <h3 id="the-deepsec-user-interface">The <strong>deepsec</strong> User Interface</h3>
 <p><strong>Deepsec</strong> also comes with a graphical user interface (GUI). The GUI is intended to provide an easy to use environment for using <strong>deepsec</strong>, browsing the results and simulating attacks as well as equivalence proofs.</p>
@@ -333,13 +334,13 @@
 <p><img src="img/equiv-sim.png" title="Select an action in Process 1." alt="Equivalence simulator" /><br />
 </p>
 <p>Initially, a single action <code>out(c,pk(ska));</code> is available and there is no other choice than select this one. This is a direct communication with the attacker on a channel; hence, the attacker needs to provide a <em>recipe</em> to compute this channel name. As here it is a constant <code>c</code> the tool proposes the recipe and we can simply validate. The three first actions do not offer any choice, and we can select the trace</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb28-1"><a href="#cb28-1"></a><span class="st">out</span>(c,ax1) · <span class="st">out</span>(c,ax2) · <span class="st">out</span>(c,ax3)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb29-1"><a href="#cb29-1"></a><span class="st">out</span>(c,ax1) · <span class="st">out</span>(c,ax2) · <span class="st">out</span>(c,ax3)</span></code></pre></div>
 <p>resulting into the <em>frame</em></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb29-1"><a href="#cb29-1"></a>ax1 -&gt; pk(ska) · ax2 -&gt; pk(skb) · ax3 -&gt; pk(skc)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb30-1"><a href="#cb30-1"></a>ax1 -&gt; pk(ska) · ax2 -&gt; pk(skb) · ax3 -&gt; pk(skc)</span></code></pre></div>
 <p>Next we have the choice between two actions <code>out(c,aenc((na,pk(ska)),pk(skb)))</code> and <code>in(c,yb)</code>. Let us first select the output and then the input <code>in(c,yb)</code>. Here we need to provide the <em>recipe</em> for the value to input (click on the “pencil”). Let’s say we want simply to forward the last output – the recipe for this is the last element of the frame and we may indicate <code>ax_4</code>. We see that this input satisfies the test in the <code>let</code> construct. Now we can select the output <code>out(c,aenc((yna,nb,pk(skb)),pk(ska)))</code> and require the tool to <em>Find equivalent trace</em> (above Process 2).</p>
 <p>We can now “walk through” the equivalent trace using the <code>&lt;Prev</code> and <code>Next&gt;</code> buttons. We see that this results into a statically equivalent frame.</p>
 <p>You may also try to see what happens if you use a different recipe for <code>in(c,yb)</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb30-1"><a href="#cb30-1"></a>aenc((#n,ax_<span class="dv">1</span>),ax_<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>    aenc((#n,ax_1),ax_2)</code></pre>
 <p>In this recipe the attacker encrypts himself a fresh name <code>#n</code> of his own (fresh names are prefixed by <code>#</code>) and <code>pk(a)</code> (specified by <code>ax_1</code>) with the <code>pk(c)</code> (specified by <code>ax_3</code>). While this results in the same message as <code>ax_4</code> <code>aenc((yna,nb,pk(skb)),pk(ska))</code> in process 1 this is not the case in process 2. Indeed, when requesting to vind an equivalent trace we see that process 2 will move into the <code>else</code> branch and send the decoy message <code>aenc(nb,pk(skb))</code>. Nevertheless, the two resulting frames are statically equivalent.</p>
 <div id="refs" class="references" role="doc-bibliography">
 <div id="ref-AF-tcs04">
