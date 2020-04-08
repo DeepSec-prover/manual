@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.3.0 -->
+  <title>DeepSec prover - Manual - A small example</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+
+<body>
+  <a id="anchor-top"></a>
+  <section class="page-header">
+    <a href="https://deepsec-prover.github.io/index.html"><img src="../logo/logo-full.png" width = 530px></a>
+    <h2 class="project-tagline">DEciding Equivalence Properties in SECurity protocols</h2>
+    <a class="btn" href="../html/install.html"><img class="logo-btn" src="../logo/install.png" width="20px">Install</a>
+    <a class="btn" href="../index.html"><img class="logo-btn" src="../logo/manual.png" width="20px">Manual</a>
+    <a class="btn" href="https://github.com/DeepSec-prover"><img class="logo-btn"
+  src="../logo/case_studies.png" width="20px">Source code</a>
+    <a class="btn" href="https://deepsec-prover.github.io/index.html#refs"><img class="logo-btn" src="../logo/publications.png" width="21px">Publications</a>
+  </section>
+
+  <div>
+    <section class="main-content">
+
+      <h1>Manual of DeepSec</h1>
+
+            <p>The manual of <strong>DeepSec</strong> is also available in <a href="../DeepSec-manual.pdf" title="User manual of the DeepSec prover">PDF</a>.</p>
+
+      <section class="page-menu">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="../index.html">Introduction</a></li>
+          <li><a href="../html/install.html">Installation</a></li>
+          <li><a href="../html/tutorial.html">Tutorial</a></li>
+	  <li><a href="../html/advanced.html">Advanced options</a></li>
+	  <li><a href="../html/gui.html">Graphical User Interface</a></li>
+	  <li><a href="../html/command.html">Command-line options</a></li>
+	  <li><a href="../html/grammar.html">Input grammar</a></li>
+        </ol>
+        <hr>
+      </section>
+      
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+<h2 id="tutorial">Tutorial</h2>
+<h3 id="the-private-authentication-protocol">The Private Authentication Protocol</h3>
+<p>We will now explain protocol verification in <strong>deepsec</strong> through an example. As <strong>deepsec</strong> specializes in verifying equivalence properties, mainly used for modelling privacy preserving properties, we will use the Private Authentication Protocol (PAP) as our example <span class="citation" data-cites="AF-tcs04">[1]</span>. The protocol can be described in “Alice &amp; Bob” notation as follows:</p>
+<pre><code>  A -&gt; B: aenc( (Na,pk(skA)), pk(skB) )
+  B -&gt; A: aenc( (Na,Nb,pk(skB)), pk(skA) )     if B accepts requests from A
+          aenc( Nb, pk(skB) )                  otherwise</code></pre>
+<p>Alice (A) makes a connection request to Bob (B). For this Alice sends the asymmetric encryption (<code>aenc</code>) of the pair <code>(Na,pk(skA)</code> with Bob’s public key (<code>pk(skB)</code>). Here <code>Na</code> is a fresh random nonce and <code>pk(skA)</code> is Alice’s public key. Here, <code>pk(sk)</code> denotes the public key corresponding to the private key <code>sk</code>. Bob may accept requests from Alice or not. The aim of the protocol is to conceal from outside observers whether Bob does accept connections from Alice or not. This is called <em>private</em> authentication. If Alice is in the list of connections accepted by Bob, Bob replies with the message <code>aenc( (Na,Nb,pk(skB)), pk(skB) )</code>, i.e. the encryption of the tuple <code>(Na,Nb,pk(skB))</code> (where <code>Nb</code> is a fresh nonce generated by Bob) with Alice’s public key <code>pk(skA)</code>. Otherwise, in order to hide the connection refusal, Bob sends a decoy message <code>aenc( Nb, pk(skB) )</code>.</p>
+<p>The modelling of the PAP protocol in <strong>deepsec</strong> is available in the file</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="ex">Examples/tutorial/pap-1-session.dps</span></span></code></pre></div>
+<p>in the <strong>deepsec</strong> directory. We suggest that you move to that directory and make sure that the <strong>deepsec</strong> executable is in your path.</p>
+<h3 id="modelling-messages-in-deepsec">Modelling messages in <strong>deepsec</strong></h3>
+<p>As in other symbolic models, protocol messages are modelled as <em>terms</em>. Therefore the first part of a <strong>deepsec</strong> file consists in the necessary declarations. To model PAP we first declare a few constants.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb3-1"><a href="#cb3-1"></a>  <span class="kw">free</span> c.</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">free</span> ska, skb, skc [<span class="dv">private</span>].</span></code></pre></div>
+<p>Here, <code>c</code> is a so-called <em>free</em> name: free names model public constants, that are known to the adversary. In PAP <code>c</code> will be a channel name, as we will see below. On the other hand we need to declare <em>secret</em> keys. For this we use <em>private</em> names <code>ska, skb, skc</code> that are declared with the additional attribute <code>[private]</code>.</p>
+<p>Next, we need to declare function symbols to represent asymmetric encryption.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="kw">fun</span> aenc/<span class="dv">2</span>.</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">fun</span> pk/<span class="dv">1</span>.</span></code></pre></div>
+<p>The function symbol <code>aenc</code> is declared to be of arity 2 using the notation <code>/2</code>. Public keys are of arity 1, as they are intended to take a secret key as argument.</p>
+<blockquote>
+<p><strong>Note:</strong> public names <em>vs</em> function symbols of arity 0</p>
+<p>It is possible to declare function symbols of arity 0, e.g. write <code>fun c/0</code>, or <code>const c</code>. This is equivalent to declaring a free name <code>free c</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> alternate modelling of secret keys using private function symbols</p>
+<p>In the modelling proposed above, we intend to compute the public key by applying the function <code>pk</code> to the secret key, e.g. <code>pk(ska)</code> would be A’s public key. An alternate way of modelling can be to derive both the public and secret key from an identity: we could declare a <em>private</em> function symbol <code>fun sk/1 [private].</code>. Then, <code>pk(a)</code> and <code>sk(a)</code> represent A’s public, respectively private, key. Declaring the function symbol <code>sk</code> as private implies that the attacker cannot apply this function symbol.</p>
+</blockquote>
+<p>Currently, we have declared function symbols <code>aenc</code> and <code>pk</code>, but nothing indicates that these functions represent asymmetric encryption. We will use <em>rewrite rules</em> to give meaning to these function symbols.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="kw">reduc</span> adec(aenc(x,pk(y)),y) -&gt; x.</span></code></pre></div>
+<p>This rule indicates that an attacker can apply decryption <code>adec</code>; if the keys match (which is required as we use the same variable <code>y</code> as arguments in encryption and decryption) then the result of applying decryption returns the plaintext <code>x</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: constructor-destructor algebras</p>
+<p>You may have noticed that we did not declare the <code>adec</code> symbol. This is because <code>adec</code> is a <em>destructor</em>, while declared function symbols are <em>constructors</em>. Destructors may actually not occur in protocol messages: if the above rewrite rule does not succeed the evaluation will <em>fail</em>. For example, the evaluation of the terms <code>adec(aenc(m,pk(ska)),skb)</code> and <code>adec(c,ska)</code> would both fail.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: deterministic vs randomized encryption</p>
+<p>You may also note that we modelled encryption as a <em>deterministic</em> function. Of course, a secure encryption scheme needs to be randomized, but in this particular example this simplified version is sufficient. This means in particular that the attacker can distinguish messages <code>aenc(0,pk(ska))</code> and <code>aenc(1,pk(ska))</code> where <code>0</code> and <code>1</code> are constants as he could simply re-encrypt these constants (supposing he knows the public key). It is however easy to model asymmetric encryption by adding a random element, making <code>aenc</code> a ternary function.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: multiple rewrite rules for a single destructor.</p>
+<p>Note that if a destructor function require several rewrite rules, they should be defined inside the same reduc.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">reduc</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>exists_double(x,x,y) -&gt; ok;</span>
+<span id="cb6-3"><a href="#cb6-3"></a>exists_double(x,y,x) -&gt; ok;</span>
+<span id="cb6-4"><a href="#cb6-4"></a>exists_double(y,x,x) -&gt; ok.</span></code></pre></div>
+</blockquote>
+<h3 id="modelling-protocols-as-processes">Modelling protocols as processes</h3>
+<p>We now need to model the behaviour of Alice and Bob. One can think of a protocol as a distributed program. Each local program of this system will be represented by a <em>process</em>. We can model Alice’s role by the following process <code>processA</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="st">let</span> processA(ska,pkb) =</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="st">new</span> na;</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="st">out</span>(c,aenc((na,pk(ska)),pkb));</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="st">in</span>(c,x).</span></code></pre></div>
+<p>The process has 2 arguments: <code>ska</code> is the secret key of the agent running this process, and <code>pkb</code> is the public key of the agent to whom we want to connect. First, the process generates a fresh random nonce using the command <code>new na</code>. Next, it sends on channel <code>c</code> the encryption of the pair <code>(na,pk(ska))</code> encrypted with the recipient’s public key <code>pkb</code>, as dictated by the protocol. Finally, the process expects an input, modelled as <code>in(c,x)</code>. Normally, one would expect additional processing of the input message, which we omit here for simplification.</p>
+<blockquote>
+<p><strong>Note</strong> private names vs new names</p>
+<p>In the above example we use <code>new na</code> to create a fresh, private name na. This is again equivalent to declaring a free, private name, as we did for <code>ska, skb</code> and <code>skb</code>. However, the <code>new</code> construct is useful when a different, fresh name should be created in every instance of the process: if we execute several instances of <code>processA</code> a distinct fresh name <code>na</code> is created in each copy.</p>
+</blockquote>
+<p>Next, we model Bob’s behaviour by the process <code>processB</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb8-1"><a href="#cb8-1"></a>  <span class="st">let</span> processB(skb,pka) =</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="st">in</span>(c,yb);</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="st">new</span> nb;</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="st">let</span> (yna,=pka) = adec(yb,skb) <span class="st">in</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>      <span class="st">out</span>(c,aenc((yna,nb,pk(skb)),pka))</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="st">else</span> <span class="st">out</span>(c,aenc(nb,pk(skb))).</span></code></pre></div>
+<p>This process introduces several new constructs that require explanations. The first action of the process is to input a message on channel <code>c</code> through the instruction <code>in(c,yb)</code>. As a consequence the message that is received will be bound to the variable <code>yb</code>. While the expected message is <code>aenc((na,pka)),pk(skb))</code> we need to keep in mind that this message may actually be provided by the attacker and may be an arbitrary message the attacker is able to forge. Therefore we need to <em>parse</em> the message and perform a number of tests. All of this is done here in a condensed form using a <code>let</code> instruction. We first decrypt (apply <code>adec</code>) the received message (referred to by the variable <code>yb</code>) with the secret key <code>skb</code>. Note that if decryption fails, we will enter the <code>else</code> branch of the <code>let</code> instruction. Next, we check that the results is a pair: the first element of the pair is bound to the variable <code>yna</code> and we check that the second variable of the pair equals the public key <code>pka</code>, i.e., the public key of a person we accept connections from. An expanded form could be written as follows.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb9-1"><a href="#cb9-1"></a>   <span class="st">let</span> yplain = adec(yb,skb) <span class="st">in</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>      <span class="st">let</span> (yna,ypka) = yplain <span class="st">in</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>         <span class="st">if</span> ypka = pka <span class="st">then</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>            <span class="st">out</span>(cb,aenc((yna,nb,pk(skb)),pka))</span>
+<span id="cb9-5"><a href="#cb9-5"></a>         <span class="st">else</span> <span class="st">out</span>(cb,aenc(nb,pk(skb)));</span>
+<span id="cb9-6"><a href="#cb9-6"></a>      <span class="st">else</span> <span class="st">out</span>(cb,aenc(nb,pk(skb)));</span>
+<span id="cb9-7"><a href="#cb9-7"></a>   <span class="st">else</span> <span class="st">out</span>(cb,aenc(nb,pk(skb))).</span></code></pre></div>
+<p>This form is however rather lengthy and requires duplicating else branches, which is why the above syntactic sugar is often convenient.</p>
+<blockquote>
+<p><strong>Note:</strong> tuples in <strong>deepsec</strong></p>
+<p>We have seen in the above example that we used notations <code>(a,b)</code> and <code>(a,b,c)</code> for tuples without explicitly declaring function symbols for pairs and triples. Actually, <strong>deepsec</strong> has built-in support for tuples. For each tuple of arity <span class="math inline"><em>n</em></span> occurring in the processes <strong>deepsec</strong> will define the constructor <code>(_, ... ,_)</code> of arity n and corresponding destructors <code>reduc proj_i_n (x1, ... ,xi, ..., xn) = xi</code> (for all <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em></span>). These destructors are used implicitly in the let instruction for projecting the elements of the tuple.</p>
+</blockquote>
+<p>Finally, we put all the pieces together ia main process <code>ProcessAB</code> modelling the entire system.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="st">let</span> ProcessAB =</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    (</span>
+<span id="cb10-6"><a href="#cb10-6"></a>      processA(ska,pk(skb)) | processB(skb,pk(ska))</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    ).</span></code></pre></div>
+<p>The system first outputs the public keys, so that they become known to the attacker. Then the system indicates that processes <code>processA</code> and <code>processB</code> are executed in parallel (each with its parameters).</p>
+<h3 id="verifying-private-authentication">Verifying private authentication</h3>
+<p>We are now interested in modelling anonymity. Anonymity is generally modelled as the indistinguishability of two systems. We therefore define a second system <code>ProcessCB</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb11-1"><a href="#cb11-1"></a>  <span class="st">let</span> ProcessCB =</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    (</span>
+<span id="cb11-6"><a href="#cb11-6"></a>      processA(skc,pk(skb)) | processB(skb,pk(skc))</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    ).</span></code></pre></div>
+<p>The difference with previous system <code>ProcessAB</code> is the parameter <code>skc</code>, rather than <code>ska</code>, given to <code>processA</code> and <code>processB</code>. Hence, <code>ProcessAB</code> models the situation where B is willing to receive connections only from A, while in <code>ProcessCB</code>, B accepts connections only from C. The goal of private authentication is to hide from whom connections are accepted. Indistinguishability can be modelled by trace equivalence. We can therefore query <strong>deepsec</strong> to check trace equivalence between these two systems.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb12-1"><a href="#cb12-1"></a>  <span class="kw">query</span> <span class="kw">trace_equiv</span>(ProcessAB,ProcessCB).</span></code></pre></div>
+<p>To verify this query we use the command</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a>  $ <span class="ex">deepsec</span> pap-1-session.dps</span></code></pre></div>
+<p><strong>deepsec</strong> will indeed confirm that this kind of anonymity is satisfied by outputting (among some other messages) that</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">Result</span> query 1: The two processes are not trace equivalent.</span></code></pre></div>
+<p>Looking at the protocol this is intuitively due to the decoy message sent in the <code>else</code> branch of <code>processB</code>. What happens when we remove the decoy message? For this we simply replace the else branch with <code>else 0</code> (or omit it completely), see the file <code>PrivateAuthentication-1session-attack.dps</code>. We can now run <strong>deepsec</strong> on this modified file.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a>  $ <span class="ex">deepsec</span> pap-1-session-attack.dps</span></code></pre></div>
+<p>This time, <strong>deepsec</strong> will report an attack:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">Result</span> query 1: The two processes are not trace equivalent.</span></code></pre></div>
+<p>Indeed, when the attacker sends the message <code>aenc((n,pk(ska)),pk(skb))</code> to B, only the first system will send a reply.</p>
+<blockquote>
+<p><strong>Note:</strong> multiple input files</p>
+<p><strong>deepsec</strong> can take several files as input. For example you may run <code>deepsec pap-1-session.dps pap-1-session-attack.dps</code>.</p>
+</blockquote>
+<h3 id="more-complex-scenarios-and-scaling-up">More complex scenarios and scaling up</h3>
+<p>In the previous section we considered a very simple scenario and our verification checked whether private authentication holds when we have one instance of <code>A</code> and <code>B</code>. Often, protocols may be secure when considering a single session, but attacks may arise when multiple sessions are executed in parallel.</p>
+<p>Let us see what happens when we consider two instances of each role resulting into the following declarations.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb17-1"><a href="#cb17-1"></a><span class="st">let</span> ProcessAB =</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb17-5"><a href="#cb17-5"></a>  (</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska)) | <span class="co">// B expects to talk to A</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  ).</span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="st">let</span> ProcessCB =</span>
+<span id="cb17-11"><a href="#cb17-11"></a>  <span class="st">out</span>(c,pk(ska));</span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="st">out</span>(c,pk(skb));</span>
+<span id="cb17-13"><a href="#cb17-13"></a>  <span class="st">out</span>(c,pk(skc));</span>
+<span id="cb17-14"><a href="#cb17-14"></a>  (</span>
+<span id="cb17-15"><a href="#cb17-15"></a>    processA(skc,pk(skb)) | processB(skb,pk(skc)) | <span class="co">// B expects to talk to C</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>    processA(ska,pk(skb)) | processB(skb,pk(ska))   <span class="co">// B expects to talk to A</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>  ).</span></code></pre></div>
+<blockquote>
+<p>Note: bounded replication</p>
+<p>When considering multiple sessions it is common to put in parallel several identical instances. For example, the process <code>ProcessAB</code> duplicates <code>processA(ska,pk(skb))</code> and <code>processB(skb,pk(ska))</code>. In more complex scenarios we may want to copy more processes a large number of times. Therefore <strong>deepsec</strong> provides a convenient operator <code>!^n</code>: <code>!^n P</code> is syntactic sugar for <code>n</code> parallel copies of <span class="math inline"><em>P</em></span> where <code>n</code> is a positive integer. In the above example</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb18-1"><a href="#cb18-1"></a>processA(ska,pk(skb)) | processB(skb,pk(ska)) |</span>
+<span id="cb18-2"><a href="#cb18-2"></a>processA(ska,pk(skb)) | processB(skb,pk(ska))</span></code></pre></div>
+<p>could have been replaced by</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb19-1"><a href="#cb19-1"></a>!^<span class="dv">2</span> processA(ska,pk(skb)) | !^<span class="dv">2</span> processB(skb,pk(ska))</span></code></pre></div>
+</blockquote>
+<p>We can run</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a>  $ <span class="ex">deepsec</span> pap-2-session.dps</span></code></pre></div>
+<p>and observe that still no attack is found. However, the verification time increases: while the result is instantaneous for 1 session it now takes several seconds on a standard laptop. This is due to the fact that <strong>deepsec</strong> has to explore <strong>all</strong> possible interleavings, whose number is exponential.</p>
+<p>While the verification time is still moderate for 2 sessions this is not the case anymore when we add a third session.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a>  $ <span class="ex">deepsec</span> pap-3-session.dps</span></code></pre></div>
+<p>will take <em>much</em> longer. How can we ensure that the protocol cannot be attacked with 3 sessions, or more?</p>
+<h4 id="distributing-the-computation">Distributing the computation</h4>
+<p>A first way to scale up is to distribute the computation. By default, <strong>deepsec</strong> checks how many physical cores your machine has and distributes the computation on these cores by creating the same amount of <em>workers</em>. To activate the distributed computation with a different number of workers, <code>deepsec</code> should be run with the option <code>-l n</code> (or <code>--local_workers n</code>) where <code>n</code> is the number of desired local workers.</p>
+<p>It is also possible to distribute computation on several machines. To do so, deepsec requires an ssh connexion between the localhost and the distant machine, using ssh key authentication, so that no password is required. The computation on a distant machine is configured with the command line option <code>-w &lt;host&gt; &lt;path&gt; &lt;n&gt;</code> (or <code>--distant_workers &lt;host&gt; &lt;path&gt; &lt;n&gt;</code>). The parameter <code>&lt;host&gt;</code> is the ssh login and address (e.g my_login@my_host). The parameter <code>&lt;path&gt;</code> should indicate the path to the deepsec directory on the distant machine. Finally, the parameter <code>&lt;n&gt;</code> represents the number of cores that should be dedicated by this distant machine to the computation of the input file.</p>
+<p>Note that the option <code>-distant_workers</code> must be used for each distant machine.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">deepsec</span> -w login1@host1 tools/deepsec 15 \</span>
+<span id="cb22-2"><a href="#cb22-2"></a>        -w login2@host2 deepsec auto my_file.dps</span></code></pre></div>
+<p>In this command line, the first machine should be accessible with <code>ssh login1@host1</code> and the <strong>deepsec</strong> directory should be located at <code>~/tools/deepsec</code> on this machine. Similarly, the second machine should be accessible with <code>ssh login2@host1</code> and the <strong>deepsec</strong> directory should be located at <code>~/deepsec</code>. If the connexions to both machines are successful, <strong>deepsec</strong> will distribute the computation between the local and the 2 distant machines: 15 cores are used on the first machine and, by specifying <code>auto</code>, all available physical cores on the second machine.</p>
+<blockquote>
+<p><strong><em>Important</em></strong>: The localhost and distant machines must have exactly the same version of <strong>deepsec</strong> (the Git hash is displayed when running <code>deepsec</code> without parameters or with the option <code>--help</code>), compiled with the same version of <strong>OCaml</strong>.</p>
+</blockquote>
+<h4 id="session-equivalence">Session equivalence</h4>
+<p>Distribution of the computation may gain a constant speed-up factor: going from a 20 hours computation to a 1 hour computation is indeed much appreciated, but may not solve the more fundamental problem of the exponential blowup.</p>
+<p>This is why <strong>deepsec</strong> proposes another, more efficient proof technique. The underlying idea is to prove a stronger equivalence relation, that we call <em>equivalence by session</em>. This equivalence significantly decreases the number of interleavings and exploits the structure of the processes. Often, we want to show the equivalence of processes that are of the form</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb23-1"><a href="#cb23-1"></a>   <span class="st">let</span> P = P1 | ... | Pn</span>
+<span id="cb23-2"><a href="#cb23-2"></a>   <span class="st">let</span> Q = Q1 | ... | Qn</span></code></pre></div>
+<p>The rough idea of equivalence by sessions is to match parallel sessions rather than individual actions. Here, for instance, one may try to match all actions of <code>P1</code> by all actions of say <code>Q3</code>, all actions of <code>P2</code> by all actions of <code>Q1</code>, etc. <strong>deepsec</strong> still needs to explore all possible matches, but this equivalence allows many more optimizations than the initial trace equivalence.</p>
+<p>For example, we may try to verify a complex scenario with 5 sessions on PAP.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a>$ <span class="ex">deepsec</span> pap-session-equiv-5-sessions.dps </span></code></pre></div>
+<p>Now this computation terminates in about a minute on a standard laptop (with two cores). Distributing this computation could of course improve the verification time.</p>
+<blockquote>
+<p><strong>Note:</strong> Equivalence by session and false attacks</p>
+<p>Why shouldn’t one always use the more efficient equivalence by session ? As explained above equivalence by session is a stronger equivalence than trace equivalence. Therefore whenever equivalence by session is satisfied, trace equivalence also holds. The converse may however not be true, and equivalence by session may lead to a <em>false attack</em> (with respect to trace equivalence). This is witnessed by the following small example</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb25-1"><a href="#cb25-1"></a><span class="st">let</span> P = <span class="st">out</span>(c,a) ; <span class="st">out</span>(c,a).</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="st">let</span> Q = <span class="st">out</span>(c,a) | <span class="st">out</span>(c,a).</span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">query</span> <span class="kw">trace_equiv</span>(P,Q).</span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">query</span> <span class="kw">session_equiv</span>(P,Q).</span></code></pre></div>
+<p>and can be tested using <strong>deepsec</strong>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a>$ <span class="ex">deepsec</span> trace-vs-session.dps </span></code></pre></div>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> Syntactic restriction</p>
+<p>The theory of equivalence by session requires that all channels are only (public or private) names or constants, i.e., no complex terms, nor variables.</p>
+</blockquote>
+<h4 id="partial-order-reduction-techniques">Partial-order reduction techniques</h4>
+<p>Probably the most effective way to fight state explosion are partial order reduction (POR) techniques. <strong>Deepsec</strong> implements powerful POR optimizations, that were designed in <span class="citation" data-cites="BDH-concur15">[2]</span>. These techniques are however only sound on a class of <em>action-determinate</em> processes: a process is action determinate when it never can reach a state where two outputs, or two inputs on a same channel are executable. Moreover, the processes may not use <em>private</em> channels. A simple, sufficient criterion is to check that syntactically no outputs on a same channel appear in parallel, and similarly for inputs, and that all channels are public. <strong>Deepsec</strong> automatically checks this criterion, and when satisfied enables POR techniques.</p>
+<p>A pragmatic way to ensure action determinacy is to use a different channel name for each process in parallel. It is easy to modify the specification of PAP in that way. This modelling allows for a spectacular efficiency gain. The verification of a scenario with 9 sessions terminates in a few seconds.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a>   $ <span class="ex">deepsec</span> pap-por-9-sessions.dps</span></code></pre></div>
+<p>Again, one may wonder why one should not always use different channel names for parallel processes? Intuitively, using different channels for parallel sessions allows the attacker to identify the session that has sent the message. While this works well for the PAP protocol, some protocols precisely rely on this <em>sender ambiguity</em> to ensure some form of anonymity.</p>
+<h3 id="the-deepsec-user-interface">The <strong>deepsec</strong> User Interface</h3>
+<p><strong>Deepsec</strong> also comes with a graphical user interface (GUI). The GUI is intended to provide an easy to use environment for using <strong>deepsec</strong>, browsing the results and simulating attacks as well as equivalence proofs.</p>
+<p>The GUI is launched by executing the <strong>DeepSec UI</strong> application. This is a standalone application that communicates with <strong>deepsec</strong> by making calls to the <strong>deepsec_api</strong> executable. Therefore, you should make sure that this executable is in your system path. (Otherwise we can manually configure the path to <strong>deepsec_api</strong>, see below).</p>
+<p>When launching <strong>DeepSec UI</strong> you should arrive at the following welcome screen.</p>
+<p><img src="img/start-run.png" title="Welcome Screen allowing to load files." alt="DeepSec UI welcome screen" /><br />
+</p>
+<p>From this screen you can navigate through the 3 main sections of the GUI (displayed on the left): * Start Run * Results * Settings</p>
+<p>Normally you should see a “pop-up” confirming that <strong>deepsec_api</strong> has been successfully detected. If not you will get a <em>warning</em> pop-up. This notification only appears for a few second. If the executable was not detected you may manually specify the path by clicking on <em>Settings</em> and providing the <em>Absolute Path of deepsec_api</em>.</p>
+<p><img src="img/settings.png" title="Absolute path to deepsec_api can be specified in Settings." alt="Settings" /><br />
+</p>
+<p>You may test that the executable is indeed available in the specified path by clicking on <em>Check API</em>.</p>
+<p>We can now navigate back to the <em>Start Run</em> section and select the files with the specifications to be analysed. Let us select the <code>pap-1-session</code> and <code>pap-1-session-attack</code> that we used previously (available in <code>Examples/tutorial/</code> in the <strong>deepsec</strong> folder). The GUI allows you to select multiple files and such a collection of files is called a <em>batch</em>. Each file of this <em>batch</em> is called a <em>run</em> and such a run may contain multiple <em>queries</em>, as several queries may be specified in a same file.</p>
+<p>In order to reference this batch we may provide a title, e.g. <code>Tutorial</code>. The <code>Start Run</code> section also allows for more advanced settings (<em>Semantics</em>, <em>Distributed</em>), but we currently keep the default settings.</p>
+<p><img src="img/batch.png" title="Files selected for the Tutorial batch." alt="Batch" /><br />
+</p>
+<p>We can now start the verification by clicking on the <em>Start Batch</em> button. Pop-up windows will notify about the status of the verification.</p>
+<p>Navigating to the results section we now see the list of all previous verifications including the <em>Tutorial</em> batch.</p>
+<p><img src="img/results.png" title="Showing the list of runs and batches." alt="Results" /><br />
+</p>
+<p>Clicking on the tutorial batch we can display additional information. You may inspect the Run options and Versions to see the precise parameters and software versions used to run this batch.</p>
+<p>Clicking on <code>pap-1-session</code> and then <code>Query 1</code> allows to reveal additional information about the individual run and query.</p>
+<p><img src="img/pap-1-sessions-result.png" title="Displaying results of Query 1 of the run pap-1-session." alt="Detailed results of a given run and query" /><br />
+</p>
+<p>We can now inspect the <em>Details</em> of <code>Query 1</code>. The first part of the screen provides a summary of the query, recalling the declarations of the file and showing the result of the verification.</p>
+<p><img src="img/summary-equivalent.png" title="Detailed summary on Query 1." alt="Detailed information on Query 1" /><br />
+</p>
+<p>The second part shows the two processes of the query.</p>
+<p><img src="img/processes-equivalent.png" title="Display of the two processes of Query 1." alt="Process display" /><br />
+</p>
+<p>We may note that all processes defined by a <code>let ... = ...</code> construct have been inlined. An interesting functionality here is the <em>Equivalence Simulator</em> (click above the processes): it allows to define a trace on one process and have <strong>deepsec</strong> find the equivalent trace on the other process. “Playing around” with the processes should allow the user to understand <em>why</em> the two processes are equivalent.</p>
+<p>For instance, we could select a trace on Process 1. Available choices are highlighted and the user may select one of them.</p>
+<p><img src="img/equiv-sim.png" title="Select an action in Process 1." alt="Equivalence simulator" /><br />
+</p>
+<p>Initially, a single action <code>out(c,pk(ska));</code> is available and there is no other choice than select this one. This is a direct communication with the attacker on a channel; hence, the attacker needs to provide a <em>recipe</em> to compute this channel name. As here it is a constant <code>c</code> the tool proposes the recipe and we can simply validate. The three first actions do not offer any choice, and we can select the trace</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb28-1"><a href="#cb28-1"></a><span class="st">out</span>(c,ax1) · <span class="st">out</span>(c,ax2) · <span class="st">out</span>(c,ax3)</span></code></pre></div>
+<p>resulting into the <em>frame</em></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb29-1"><a href="#cb29-1"></a>ax1 -&gt; pk(ska) · ax2 -&gt; pk(skb) · ax3 -&gt; pk(skc)</span></code></pre></div>
+<p>Next we have the choice between two actions <code>out(c,aenc((na,pk(ska)),pk(skb)))</code> and <code>in(c,yb)</code>. Let us first select the output and then the input <code>in(c,yb)</code>. Here we need to provide the <em>recipe</em> for the value to input (click on the “pencil”). Let’s say we want simply to forward the last output – the recipe for this is the last element of the frame and we may indicate <code>ax_4</code>. We see that this input satisfies the test in the <code>let</code> construct. Now we can select the output <code>out(c,aenc((yna,nb,pk(skb)),pk(ska)))</code> and require the tool to <em>Find equivalent trace</em> (above Process 2).</p>
+<p>We can now “walk through” the equivalent trace using the <code>&lt;Prev</code> and <code>Next&gt;</code> buttons. We see that this results into a statically equivalent frame.</p>
+<p>You may also try to see what happens if you use a different recipe for <code>in(c,yb)</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb30-1"><a href="#cb30-1"></a>aenc((#n,ax_<span class="dv">1</span>),ax_<span class="dv">2</span>)</span></code></pre></div>
+<p>In this recipe the attacker encrypts himself a fresh name <code>#n</code> of his own (fresh names are prefixed by <code>#</code>) and <code>pk(a)</code> (specified by <code>ax_1</code>) with the <code>pk(c)</code> (specified by <code>ax_3</code>). While this results in the same message as <code>ax_4</code> <code>aenc((yna,nb,pk(skb)),pk(ska))</code> in process 1 this is not the case in process 2. Indeed, when requesting to vind an equivalent trace we see that process 2 will move into the <code>else</code> branch and send the decoy message <code>aenc(nb,pk(skb))</code>. Nevertheless, the two resulting frames are statically equivalent.</p>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-AF-tcs04">
+<p>[1] M. Abadi and C. Fournet, “Private authentication,” <em>Theor. Comput. Sci.</em>, vol. 322, no. 3, pp. 427–476, 2004.</p>
+</div>
+<div id="ref-BDH-concur15">
+<p>[2] D. Baelde, S. Delaune, and L. Hirschi, “Partial order reduction for security protocols,” in <em>Proc. 26th International Conference on Concurrency Theory (CONCUR’15)</em>, 2015, vol. 42, pp. 497–510.</p>
+</div>
+</div>
+
+      <hr>
+      <div class="footer-nav">
+        <div class="footer-nav-Body">
+          <div class="footer-nav-Row">
+            <div class="footer-nav-Left"><a href="../manual/install.html">&#8592;&nbsp;Installation</a></div>
+            <div class="footer-nav-Mid"><a href="#anchor-top">Top</a></div>
+            <div class="footer-nav-Right"><a href="../manual/advanced.html">Advanced options&nbsp;&#8594;</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-owner">
+      Authors:
+              <a href="https://members.loria.fr/vcheval">Vincent Cheval</a>
+      ,         <a href="https://members.loria.fr/SKremer">Steve Kremer</a>
+      ,         <a href="https://members.loria.fr/IRakotonirina">Itsaka Rakotonirina</a>
+          </section>
+
+    <section class="site-footer-credits">
+      <img src="../logo/inr_logo_eng_rouge.png" width="150px">
+      <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+    </section>
+  </div>
+</body>

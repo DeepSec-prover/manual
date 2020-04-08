@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.3.0 -->
+  <title>DeepSec prover - Manual - Command line</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+
+<body>
+  <a id="anchor-top"></a>
+  <section class="page-header">
+    <a href="https://deepsec-prover.github.io/index.html"><img src="../logo/logo-full.png" width = 530px></a>
+    <h2 class="project-tagline">DEciding Equivalence Properties in SECurity protocols</h2>
+    <a class="btn" href="../html/install.html"><img class="logo-btn" src="../logo/install.png" width="20px">Install</a>
+    <a class="btn" href="../index.html"><img class="logo-btn" src="../logo/manual.png" width="20px">Manual</a>
+    <a class="btn" href="https://github.com/DeepSec-prover"><img class="logo-btn"
+  src="../logo/case_studies.png" width="20px">Source code</a>
+    <a class="btn" href="https://deepsec-prover.github.io/index.html#refs"><img class="logo-btn" src="../logo/publications.png" width="21px">Publications</a>
+  </section>
+
+  <div>
+    <section class="main-content">
+
+      <h1>Manual of DeepSec</h1>
+
+            <p>The manual of <strong>DeepSec</strong> is also available in <a href="../DeepSec-manual.pdf" title="User manual of the DeepSec prover">PDF</a>.</p>
+
+      <section class="page-menu">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="../index.html">Introduction</a></li>
+          <li><a href="../html/install.html">Installation</a></li>
+          <li><a href="../html/tutorial.html">Tutorial</a></li>
+	  <li><a href="../html/advanced.html">Advanced options</a></li>
+	  <li><a href="../html/gui.html">Graphical User Interface</a></li>
+	  <li><a href="../html/command.html">Command-line options</a></li>
+	  <li><a href="../html/grammar.html">Input grammar</a></li>
+        </ol>
+        <hr>
+      </section>
+      
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+<h2 id="command-line-options">Command-line options</h2>
+<p>Command-line options of DeepSec.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">deepsec</span> [OPTIONS] FILELIST</span></code></pre></div>
+<h3 id="general-options">General options</h3>
+<pre><code>-s, --semantics VALUE (default=private)</code></pre>
+<blockquote>
+<p>Specify the default semantics of the process calculus. VALUE must be one of ‘private’, ‘classic’ or ‘eavesdrop’. See Section <a href="#semantics"><em>Choosing the semantics</em></a> for detailed explanations.</p>
+</blockquote>
+<pre><code>-p, --por BOOL (default=true)</code></pre>
+<blockquote>
+<p>Enable or disable Partial Order Reduction (POR) techniques for trace equivalence. BOOL must be either ‘true’ or ‘false’. Note that even when set to ‘true’, POR techniques only apply to action determinate processes. See Section <a href="#por"><em>Partial order reductions</em></a> for detailed explanations.</p>
+</blockquote>
+<pre><code>-t, --title TITLE</code></pre>
+<blockquote>
+<p>Set a TITLE for this run (displayed only with the graphical user interface).</p>
+</blockquote>
+<pre><code>-q, --quiet</code></pre>
+<blockquote>
+<p>Only display the result of query verification, and no information about rounds.</p>
+</blockquote>
+<pre><code>--trace</code></pre>
+<blockquote>
+<p>When an attack is found, display the full trace with the execution of the process. Incompatible with –quiet. <strong>Not implemented yet</strong>.</p>
+</blockquote>
+<pre><code>-h, -help, --help</code></pre>
+<blockquote>
+<p>Display information about command line options.</p>
+</blockquote>
+<h3 id="command-distributed">Options for distributing computation</h3>
+<pre><code>-d, --distributed VALUE (default=auto)</code></pre>
+<blockquote>
+<p>Specify if the computation should be distributed. VALUE must be one of ‘auto’, ‘true’ or ‘false’. When VALUE=‘auto’, the number of workers will be set to the number of avilable physical cores. See Section <a href="#distributed"><em>Distributing the computation</em></a> for detailed explanations. Note that when VALUE=‘true’, deepsec activates the distributed computation even if your computer only has one core.</p>
+</blockquote>
+<pre><code>-l, --local_workers INT</code></pre>
+<blockquote>
+<p>Set the number of local workers to INT. If set, <code>--distriburted</code> is also set to ‘true’.</p>
+</blockquote>
+<pre><code>-w, --distant_workers HOST PATH VALUE</code></pre>
+<blockquote>
+<p>Allows to add distant workers on machine HOST. See Section <a href="#distributed"><em>Distributing the computation</em></a> for detailed explanations.</p>
+<ul>
+<li><p>PATH must be the path on HOST to the directory that contains the deepsec executable.</p></li>
+<li><p>VALUE must be either ‘auto’ or an integer, specifying the number of workers on HOST. When VALUE=‘auto’, the number of workers is set to the number of physical cores on the distant machine.</p></li>
+</ul>
+<p>Example: <code>-w login@my_server.server.org ~/deepsec/ auto</code></p>
+<p><strong>Note</strong>: It is possible to rely on multiple distant machine by using several instances of –distant_workers. Automatically sets –distributed to ‘true’.</p>
+<p><strong>Note</strong>: the host must be configured with SSH key-based authentication.</p>
+</blockquote>
+<pre><code>-j, --jobs INT</code></pre>
+<blockquote>
+<p>Specify the number of jobs to INT during the job creation phase. See Section <a href="#distributed"><em>Distributing the computation</em></a> for detailed explanations. Automatically sets <code>--distributed</code> to ‘true’. The default number of jobs is 100 times the total number of workers.</p>
+</blockquote>
+<pre><code>-r, --round_timer INT (default=120)</code></pre>
+<blockquote>
+<p>Sets the round timer to INT seconds. See Section <a href="#distributed"><em>Distributing the computation</em></a> for detailed explanations.</p>
+</blockquote>
+
+      <hr>
+      <div class="footer-nav">
+        <div class="footer-nav-Body">
+          <div class="footer-nav-Row">
+            <div class="footer-nav-Left"><a href="../manual/gui.html">&#8592;&nbsp;The graphical User Interface</a></div>
+            <div class="footer-nav-Mid"><a href="#anchor-top">Top</a></div>
+            <div class="footer-nav-Right"><a href="../manual/grammar.html">Language reference&nbsp;&#8594;</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-owner">
+      Authors:
+              <a href="https://members.loria.fr/vcheval">Vincent Cheval</a>
+      ,         <a href="https://members.loria.fr/SKremer">Steve Kremer</a>
+      ,         <a href="https://members.loria.fr/IRakotonirina">Itsaka Rakotonirina</a>
+          </section>
+
+    <section class="site-footer-credits">
+      <img src="../logo/inr_logo_eng_rouge.png" width="150px">
+      <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+    </section>
+  </div>
+</body>

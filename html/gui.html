@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.3.0 -->
+  <title>DeepSec prover - Manual - Graphical User Interface</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+
+<body>
+  <a id="anchor-top"></a>
+  <section class="page-header">
+    <a href="https://deepsec-prover.github.io/index.html"><img src="../logo/logo-full.png" width = 530px></a>
+    <h2 class="project-tagline">DEciding Equivalence Properties in SECurity protocols</h2>
+    <a class="btn" href="../html/install.html"><img class="logo-btn" src="../logo/install.png" width="20px">Install</a>
+    <a class="btn" href="../index.html"><img class="logo-btn" src="../logo/manual.png" width="20px">Manual</a>
+    <a class="btn" href="https://github.com/DeepSec-prover"><img class="logo-btn"
+  src="../logo/case_studies.png" width="20px">Source code</a>
+    <a class="btn" href="https://deepsec-prover.github.io/index.html#refs"><img class="logo-btn" src="../logo/publications.png" width="21px">Publications</a>
+  </section>
+
+  <div>
+    <section class="main-content">
+
+      <h1>Manual of DeepSec</h1>
+
+            <p>The manual of <strong>DeepSec</strong> is also available in <a href="../DeepSec-manual.pdf" title="User manual of the DeepSec prover">PDF</a>.</p>
+
+      <section class="page-menu">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="../index.html">Introduction</a></li>
+          <li><a href="../html/install.html">Installation</a></li>
+          <li><a href="../html/tutorial.html">Tutorial</a></li>
+	  <li><a href="../html/advanced.html">Advanced options</a></li>
+	  <li><a href="../html/gui.html">Graphical User Interface</a></li>
+	  <li><a href="../html/command.html">Command-line options</a></li>
+	  <li><a href="../html/grammar.html">Input grammar</a></li>
+        </ol>
+        <hr>
+      </section>
+      
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+<h2 id="the-graphical-user-interface">The graphical User Interface</h2>
+<p><strong>Deepsec</strong> comes with a Graphical User Interface (GUI). <strong>DeepSecUI</strong> is a standalone application that interacts with the <code>deepsec_api</code> executable.</p>
+<p>When launching the application you should see a pop-up message stating <em>“DeepSec API version x.y.z successfully detected”</em>. This means that <strong>DeepSecUI</strong> was able to successfully locate the <code>deepsec_api</code> executable. If you see a message <em>“DeepSec API path is not set”</em> you must either add the path to your executable in your system PATH, or manually indicate <em>Absolute Path of deepsec_api</em> in the <em>Settings</em>.</p>
+<p>The GUI should be rather intuitive and mostly self-explanatory if you are familiar with protocol verification. We document each of the sections of the GUI and its main items.</p>
+<h3 id="start-run">Start run</h3>
+<p><strong>DeepSecUI</strong> allows to select several files and run <strong>deepsec</strong> on these files for verification. Such a set of files is called a <em>batch</em>. Running <strong>deepsec</strong> on a single file is called a <em>run</em>. Each file may contain several <em>queries</em> to be verified.</p>
+<p>The <em>Select files</em> button allows to select one or more files for a run, respectively batch. It is possible to specify a title for a run or batch. If specified, this title will be used in the <em>Results</em> section to refer to the batch, or run.</p>
+<p>One can also set the advanced options for the <a href="#sematics"><em>semantics</em></a> and <a href="#distributed"><em>distributed computation</em></a> as document in <a href="#advanced"><em>Advanced options</em></a>.</p>
+<h3 id="results">Results</h3>
+<p>The <em>Results</em> section displays a list of all previous verification batches.</p>
+<h4 id="batch-run-and-query-information">Batch, run and query information</h4>
+<p>Clicking on a particular batch in the list of all batches provides detailed information and results regarding the selected batch. The detailed information includes</p>
+<ul>
+<li>a summary with general information such as the precise time, the verification time and the memory usage;</li>
+<li>all run options, regarding semantics, POR and distribution of computation;</li>
+<li>version information about the precise version of <strong>deepsec</strong> and the compiler.</li>
+</ul>
+<p>These information are particularly useful for reproducibility, as well as for bug reporting.</p>
+<p>Below the batch information it is possible to get information for each run. The information about a run contains the file name, number of queries and verification time.</p>
+<p>Clicking on a run displays the result for each query. Additional information (semantics, type, ressources used) can be obtained by clicking on the query.</p>
+<h4 id="details-of-a-query-exploring-attacks-and-equivalence-proofs">Details of a query: exploring attacks and equivalence proofs</h4>
+<p>By clicking on <em>Details</em> the tool provides additional information about the particular query. In particular it displays a summary of the query and recalls the signature (the function declaration and rewrite system), and in case of an attack, the attack trace.</p>
+<p>It also displays the processes on which the verification was run and provides an equivalence, respectively attack simulator.</p>
+<ul>
+<li><p>The equivalence simulator allows the user to select a trace of one of the processes, by selecting a sequence of actions. The tool highlights available actions and the user chooses the next action. Once the user has selected a trace, one may request the tool to find an equivalent trace on the other process.</p></li>
+<li><p>The attack simulator allows the user to <em>replay</em> an attack: for an attack trace on one process, the user select actions on the other process that follow the attack trace. This allows the user to explore all possible available traces and convince the user that either no such trace exists, or that all traces lead to frames that can be distinguished.</p></li>
+</ul>
+<p>Selecting the actions requires a few additional explanations:</p>
+<ul>
+<li><p>The user may select the level of details of the actions: <code>Default</code>, <code>I/O</code>, and <code>All</code>. When <code>I/O</code> is selected, only inputs and outputs are shown; internal <span class="math inline"><em>τ</em></span> actions are executed tacitly. When <code>All</code> is selected, the user also explicitly executes internal actions. <code>Default</code> is an intermediate choice where some internal actions are executed automatically, while others need to be selected explicitly. The <code>I/O</code> option is only available in case of an attack, not for an equivalence proof.</p></li>
+<li><p>Sometimes, when selecting an input, or an output, the user may choose between an internal communication (matching directly an input and output of the process on a same channel) and a communication with the attacker.</p></li>
+<li><p>When defining an attacker action in the equivalence simulator, it might be necessary to provide the attacker computation, called the recipe. This is required to provide the computation of the channel, for both inputs and outputs, as well as the term to be provided by the attacker for an input. These recipes are terms built from the (public) function symbols and constants of the signature, fresh names (prefixed by a <code>#</code>, e.g. <code>#n</code>) and elements of the frame, referred to as <code>ax_i</code>.</p></li>
+</ul>
+<h3 id="settings">Settings</h3>
+<p>The settings allow to configure the <strong>DeepSecUI</strong> environment.</p>
+<ul>
+<li><p><em>Show helpers</em> allows to turn on and off explanations that appear when you hover on options.</p></li>
+<li><p><em>Absolute Path of deepsec_api</em> allows to set the path to the <code>deepsec_api</code> executable. This path is set automatically when the executable is in the PATH of your system environment.</p></li>
+<li><p><em>Results directory</em> provides information where data on all runs and results are stored.</p></li>
+<li><p>The <em>Check API</em> button allows to test whether the <code>deepsec_api</code> executable is available at the path given above.</p></li>
+<li><p>The <em>Notification</em> section allows to configure the behaviour of pop-up windows. One can define the duration a pop-up window appears, which result notifications should be notified (batch, run, query), and define whether warning and error pop-ups should be “sticky”, i.e., only disappear after manual removal. The behaviour can be tested using the <em>Test Notifications</em> button.</p></li>
+<li><p>The <em>Scan for new batch</em> button allows to scan for batches and runs that were run using the command line. These runs are then added to the list of batches in the <em>Results</em> section. When the <code>--title</code> option is used with the <a href="#commad">command line</a>, the provided title will be used in the list.</p></li>
+</ul>
+
+      <hr>
+      <div class="footer-nav">
+        <div class="footer-nav-Body">
+          <div class="footer-nav-Row">
+            <div class="footer-nav-Left"><a href="../manual/advanced.html">&#8592;&nbsp;Advanced Options</a></div>
+            <div class="footer-nav-Mid"><a href="#anchor-top">Top</a></div>
+            <div class="footer-nav-Right"><a href="../manual/command.html">Command line options&nbsp;&#8594;</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-owner">
+      Authors:
+              <a href="https://members.loria.fr/vcheval">Vincent Cheval</a>
+      ,         <a href="https://members.loria.fr/SKremer">Steve Kremer</a>
+      ,         <a href="https://members.loria.fr/IRakotonirina">Itsaka Rakotonirina</a>
+          </section>
+
+    <section class="site-footer-credits">
+      <img src="../logo/inr_logo_eng_rouge.png" width="150px">
+      <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+    </section>
+  </div>
+</body>

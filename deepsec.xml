@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Kate syntax highlighting for DeepSec -->
+
+<!DOCTYPE language SYSTEM "language.dtd"
+[
+<!-- Regular expression constants: -->
+<!ENTITY LOWER  "a-z\300-\326\330-\337">         <!-- Lowercase Latin-1 letters. -->
+<!ENTITY UPPER  "A-Z\340-\366\370-\377">         <!-- Uppercase Latin-1 letters. -->
+<!ENTITY LETTER "&LOWER;&UPPER;">                <!-- All Latin-1 letters. -->
+<!ENTITY LIDENT "[&LOWER;_][&LETTER;0-9_']*">    <!-- Lowercase identifiers. -->
+<!ENTITY UIDENT "`?[&UPPER;][&LETTER;0-9_']*">   <!-- Uppercase identifiers. -->
+<!ENTITY IDENT  "`?[&LETTER;][&LETTER;0-9_']*">  <!-- All identifiers. -->
+<!ENTITY ESC    "(\\[ntbr'&quot;\\]|\\[0-9]{3}|\\x[0-9A-Fa-f]{2})"> <!-- OCaml character code escapes. -->
+<!ENTITY DEC    "[0-9][0-9_]*">                                     <!-- Decimal digits with underscores. -->
+]>
+<language name="DeepSec"
+          extensions="*.dps"
+          mimetype="deepsec"
+          section="manual"
+          version="1"
+          priority="1"
+          kateversion="2.4"
+          author="Itsaka Rakotonirina (itsaka.rakotonirina@gmail.com)"
+          license="LGPL" >
+
+  <highlighting>
+    <list name="Keyword">
+      <item>fun</item>
+      <item>const</item>
+      <item>free</item>
+      <item>reduc</item>
+    </list>
+
+    <list name="Control-flow Keyword">
+      <item>else</item>
+      <item>if</item>
+      <item>in</item>
+      <item>out</item>
+      <item>let</item>
+      <item>new</item>
+      <item>then</item>
+    </list>
+
+    <list name="Options">
+      <item>private</item>
+    </list>
+
+    <list name="Queries">
+      <item>query</item>
+      <item>trace_equiv</item>
+      <item>session_equiv</item>
+    </list>
+
+    <contexts>
+
+      <context name="Code" lineEndContext="#stay" attribute="None">
+
+        <!-- Comments. -->
+        <Detect2Chars char="(" char1="*" context="Comment"  attribute="Comment" beginRegion="comment" />
+        <Detect2Chars char="/" char1="/" context="CommentSingle"  attribute="Comment" beginRegion="comment" />
+
+
+        <!-- keywords and operators -->
+        <keyword String="Keyword"                 context="#stay" attribute="Keyword" />
+        <keyword String="Control-flow Keyword"                 context="#stay" attribute="CFKeyword" />
+        <keyword String="Options"                 context="#stay" attribute="Options" />
+        <keyword String="Queries"      context="#stay" attribute="Queries" />
+
+        <!-- Numeric constants. -->
+        <RegExpr String="&DEC;" context="#stay" attribute="Decimal" />
+
+      </context>
+
+      <context name="Comment" lineEndContext="#stay" attribute="Comment">
+        <Detect2Chars char="*" char1=")" context="#pop" attribute="Comment" endRegion="comment"  />
+        <Detect2Chars char="(" char1="*" context="Comment" attribute="Comment" beginRegion="comment" />
+      </context>
+
+      <context attribute="Comment" lineEndContext="#pop" name="CommentSingle">
+        <LineContinue attribute="Comment" context="#stay"/>
+      </context>
+
+    </contexts>
+
+    <itemDatas>
+      <itemData name="Keyword"                 defStyleNum="dsKeyword"  />
+      <itemData name="CFKeyword"                 defStyleNum="dsString"  />
+      <itemData name="Options"                 defStyleNum="dsDecVal"  />
+      <itemData name="Decimal"                 defStyleNum="dsDecVal" />
+      <itemData name="Comment"                 defStyleNum="dsComment"  />
+      <!-- <itemData name="Queries"                 defStyleNum="dsError"  /> -->
+      <itemData name="Queries"                 defStyleNum="dsKeyword"  />
+    </itemDatas>
+  </highlighting>
+
+  <general>
+    <keywords casesensitive="true" />
+  </general>
+</language>

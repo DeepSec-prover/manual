@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.3.0 -->
+  <title>DeepSec prover - Manual - Advanced options</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+
+<body>
+  <a id="anchor-top"></a>
+  <section class="page-header">
+    <a href="https://deepsec-prover.github.io/index.html"><img src="../logo/logo-full.png" width = 530px></a>
+    <h2 class="project-tagline">DEciding Equivalence Properties in SECurity protocols</h2>
+    <a class="btn" href="../html/install.html"><img class="logo-btn" src="../logo/install.png" width="20px">Install</a>
+    <a class="btn" href="../index.html"><img class="logo-btn" src="../logo/manual.png" width="20px">Manual</a>
+    <a class="btn" href="https://github.com/DeepSec-prover"><img class="logo-btn"
+  src="../logo/case_studies.png" width="20px">Source code</a>
+    <a class="btn" href="https://deepsec-prover.github.io/index.html#refs"><img class="logo-btn" src="../logo/publications.png" width="21px">Publications</a>
+  </section>
+
+  <div>
+    <section class="main-content">
+
+      <h1>Manual of DeepSec</h1>
+
+            <p>The manual of <strong>DeepSec</strong> is also available in <a href="../DeepSec-manual.pdf" title="User manual of the DeepSec prover">PDF</a>.</p>
+
+      <section class="page-menu">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="../index.html">Introduction</a></li>
+          <li><a href="../html/install.html">Installation</a></li>
+          <li><a href="../html/tutorial.html">Tutorial</a></li>
+	  <li><a href="../html/advanced.html">Advanced options</a></li>
+	  <li><a href="../html/gui.html">Graphical User Interface</a></li>
+	  <li><a href="../html/command.html">Command-line options</a></li>
+	  <li><a href="../html/grammar.html">Input grammar</a></li>
+        </ol>
+        <hr>
+      </section>
+      
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+<h2 id="advanced">Advanced options</h2>
+<p><strong>Deepsec</strong> provides a number of <em>advanced</em> options which require a bit more understanding of the semantics and inner working of <strong>deepsec</strong>. Below we give a slightly more in-depth explanation and pointers to relevant papers.</p>
+<h3 id="por">Partial Order Reductions</h3>
+<p>Partial Order Reductions (POR) are a technique to battle state explosion. Given that the number of interleavings of parallel processes is exponential, POR techniques try to avoid the need to explore <em>all</em> interleavings. For example, given actions <span class="math inline"><em>a</em>, <em>b</em>, <em>c</em>, <em>d</em></span>, sometimes the interleavings <span class="math inline"><em>a</em><em>b</em><em>c</em><em>d</em></span> and <span class="math inline"><em>a</em><em>c</em><em>b</em><em>d</em></span> may be completely equivalent in the sense that neither of them increases the attacker’s power to distinguish. One may think of this as a <em>partial order</em>: we need to consider all interleavings such that <span class="math inline"><em>a</em></span> &lt; <span class="math inline"><em>b</em>, <em>c</em></span> &lt;<span class="math inline"><em>d</em></span> where &lt; is the precedence relation, but <span class="math inline"><em>b</em></span> and <span class="math inline"><em>c</em></span> are not ordered. POR techniques then only explore one representative of each class of equivalent interleavings.</p>
+<p><em>Deepsec</em> implements the POR techniques presented in <span class="citation" data-cites="BDH-concur15">[1]</span>. The techniques are correct for a class of <em>action determinate</em> processes. <em>Deepsec</em> checks a slightly stronger, syntactic condition: there are no two parallel processes that have two outputs, respectively inputs, on the same channel, and all channels are public.</p>
+<p>By default, the POR optimization is activated automatically whenever this syntactic condition is satisfied. One can manually disable the POR optimization, using either the command line or the graphical user interface. Note that even if POR is set manually to true, it does not change the behavior of non determinate processes in order to guarantee soundness of the result.</p>
+<h3 id="semantics">Choosing the semantics</h3>
+<p>The applied pi calculus comes with formal semantics under the form of a <em>transition relation</em> between processes <span class="citation" data-cites="ABF-jacm18">[2]</span>. Minor, apparently insignificant variants have been considered in the literature. In <span class="citation" data-cites="BCK-jcs20">[3]</span>, typical small variants of the semantics of public communications, occurring in the literature, are studied and 3 different semantics are considered:</p>
+<ul>
+<li>the classic semantics,</li>
+<li>the private semantics, and the</li>
+<li>eavesdrop semantics.</li>
+</ul>
+<p>We will explain the difference between these semantics on an example.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb1-1"><a href="#cb1-1"></a><span class="st">let</span> P = <span class="st">out</span>(c,t).P1 | <span class="st">in</span>(c,x).P2</span></code></pre></div>
+<p>We suppose that <code>c</code> is a public name, i.e., the channel is known to the adversary.</p>
+<p>In the <em>classical semantics</em>, as defined in the original paper presenting the applied pi calculus <span class="citation" data-cites="ABF-jacm18">[2]</span>, the process <code>P</code> may reduce in different ways:</p>
+<ul>
+<li><p><code>P</code> may perform an <em>internal communication</em> and reduce to <code>P1 | P2{t/x}</code> that is the two parallel processes perform the output and the corresponding input and the variable <code>x</code> is replaced by the term <code>t</code> in process <code>P2</code>; an important point is that this is an <em>internal</em> action and therefore not visible to the adversary;</p></li>
+<li><p><code>P</code> may perform a visible output on channel <code>c</code> and continue as <code>P1 | in(c,x).P2</code>, adding <code>t</code> to the attacker knowledge;</p></li>
+<li><p><code>P</code> may perform a visible input on channel <code>c</code> and continue as <code>out(c,t).P1 | P2{u/x}</code> where <code>u</code> is a term provided by the attacker.</p></li>
+</ul>
+<p>In the <em>private semantics</em> we remove the possibility of internal communication on a public channel. Internal communications are only possible on private channels. These semantics have been considered in many papers, because an adversary can explicitly forward the term <code>t</code> by successively performing a visible output and a visible input with term <code>t</code> (which can be provided by the attacker as it was added to his knowledge just before). An advantage of these semantics is that verification is more efficient as less interleavings need to be considered.</p>
+<p>While the two semantics are equivalent for reachability properties, they happen to be incomparable, in general, when verifying trace equivalence (or other equivalences), as shown in <span class="citation" data-cites="BCK-jcs20">[3]</span>: two processes may be trace equivalent in the private semantics, but not in the classical semantics, and vice-versa.</p>
+<p>In the <em>eavesdrop semantics</em>, all three possible reductions of the classical semantics are considered. However, when performing an internal communication on a public channel, this action becomes visible to the attacker and the term is added to his knowledge.</p>
+<p>Whenever trace equivalence holds in the eavesdrop semantics it also holds in both the classical and private semantics. Therefore, verification with the eavesdrop semantics is a conservative choice.</p>
+<p>It was also shown in <span class="citation" data-cites="BCK-jcs20">[3]</span> that trace equivalence coincides on all three semantics for the class of strongly determinate processes, that is the class on which <strong>deepsec</strong> enables POR techniques. The default semantics of <strong>deepsec</strong> are the private semantics which yield more efficient verification. The semantics can be modified using either the command line or the graphical user interface.</p>
+<h3 id="distributed">Distributing the computation</h3>
+<p><strong>Deepsec</strong> allows to distribute the computation on multiple cores, as well as on multiple servers. To explain the distribution we need to give a high-level overview on how <strong>deepsec</strong> verifies trace equivalence.</p>
+<p>To check trace equivalence <strong>deepsec</strong> needs to compute a large symbolic execution tree, called the <em>partition tree</em>: each path in this tree corresponds to a symbolic trace, i.e. a trace that may contain non instantiated variables. Each node in the tree regroups the set of equivalent, symbolic processes, after the execution of the symbolic trace leading to this node. Checking trace equivalence between processes <code>P</code> and <code>Q</code> then consists in verifying that each node contains at least one process derived from <code>P</code> and one derived from <code>Q</code>.</p>
+<p>The main idea of the distribution is to let different cores explore different branches of the tree.</p>
+<ul>
+<li><p>The first step is the <em>job creation</em>: we generate, in a breadth-first manner, a number of nodes whose subtrees need to be generated and explored. These nodes are stored in a queue and called <em>jobs</em>. The number of such jobs that are initially generated</p></li>
+<li><p>Next each <em>worker</em>, i.e., each core, fetches a job and verifies the underlying subtree. When a job is finished, the <em>worker</em> fetches the next job in the queue.</p></li>
+<li><p>As the tree is not balanced, some jobs may require much more computation than others (and we cannot predict wich jobs are taking more time). Therefore, some workers may become idle while others still have a large subtree to verify. When a worker becomes idle, i.e., the queue of pending jobs is empty, we start a <em>timer</em>: after the time-out we kill ongoing jobs, and start a new job creation phase to distribute the computation of these remaining large subtrees. This is called a new <em>round</em>.</p></li>
+</ul>
+<p>The time-out before staring the next round avoids killing on-going work that is about to finish and get into a job creation – kill worker loop.</p>
+<p>The <a href="#command-distributed">command line</a> and graphical user interface allow to set the values for</p>
+<ul>
+<li>the number of local and remote workers – when set to ‘auto’ all available, physical cores are used;</li>
+<li>the minimum number of jobs created in the job creation phase – when set to ‘auto’ the number of jobs is 100 <span class="math inline">×</span> the total number of workers;</li>
+<li>the round timer – the default value is 120 seconds.</li>
+</ul>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-BDH-concur15">
+<p>[1] D. Baelde, S. Delaune, and L. Hirschi, “Partial order reduction for security protocols,” in <em>Proc. 26th International Conference on Concurrency Theory (CONCUR’15)</em>, 2015, vol. 42, pp. 497–510.</p>
+</div>
+<div id="ref-ABF-jacm18">
+<p>[2] M. Abadi, B. Blanchet, and C. Fournet, “The applied pi calculus: Mobile values, new names, and secure communication,” <em>J. ACM</em>, vol. 65, no. 1, pp. 1:1–1:41, 2018.</p>
+</div>
+<div id="ref-BCK-jcs20">
+<p>[3] K. Babel, V. Cheval, and S. Kremer, “On the semantics of communications when verifying equivalence properties,” <em>Journal of Computer Security</em>, vol. 28, no. 1, pp. 71–127, 2020.</p>
+</div>
+</div>
+
+      <hr>
+      <div class="footer-nav">
+        <div class="footer-nav-Body">
+          <div class="footer-nav-Row">
+            <div class="footer-nav-Left"><a href="../manual/tutorial.html">&#8592;&nbsp;Tutorial</a></div>
+            <div class="footer-nav-Mid"><a href="#anchor-top">Top</a></div>
+            <div class="footer-nav-Right"><a href="../manual/gui.html">The Graphical User Interface&nbsp;&#8594;</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-owner">
+      Authors:
+              <a href="https://members.loria.fr/vcheval">Vincent Cheval</a>
+      ,         <a href="https://members.loria.fr/SKremer">Steve Kremer</a>
+      ,         <a href="https://members.loria.fr/IRakotonirina">Itsaka Rakotonirina</a>
+          </section>
+
+    <section class="site-footer-credits">
+      <img src="../logo/inr_logo_eng_rouge.png" width="150px">
+      <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+    </section>
+  </div>
+</body>

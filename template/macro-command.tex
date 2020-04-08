@@ -1,0 +1,25 @@
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+\RequirePackage{mdframed}
+\newmdenv[
+  leftmargin = 3pt,
+  innerleftmargin = 8pt,
+  innertopmargin = 0pt,
+  innerbottommargin = 0pt,
+  innerrightmargin = 0pt,
+  rightmargin = 0pt,
+  linewidth = 0.6pt,
+  topline = false,
+  rightline = false,
+  bottomline = false,
+  linecolor=lightgray
+  ]{leftbar}
+
+  
+\renewenvironment{quote}{\medskip\begin{leftbar}}{\end{leftbar}\medskip}
+

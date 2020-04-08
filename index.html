@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Begin Jekyll SEO tag v2.3.0 -->
+  <title>DeepSec prover - Manual</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- the following three lines seem needed to get syntax highlighting of
+  fenced code blocks -->
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+
+<body>
+  <a id="anchor-top"></a>
+  <section class="page-header">
+    <a href="https://deepsec-prover.github.io/index.html"><img src="logo/logo-full.png" width = 530px></a>
+    <h2 class="project-tagline">DEciding Equivalence Properties in SECurity protocols</h2>
+    <a class="btn" href="html/install.html"><img class="logo-btn" src="logo/install.png" width="20px">Install</a>
+    <a class="btn" href="index.html"><img class="logo-btn" src="logo/manual.png" width="20px">Manual</a>
+    <a class="btn" href="https://github.com/DeepSec-prover"><img class="logo-btn"
+  src="logo/case_studies.png" width="20px">Source code</a>
+    <a class="btn" href="https://deepsec-prover.github.io/index.html#refs"><img class="logo-btn" src="logo/publications.png" width="21px">Publications</a>
+  </section>
+
+  <div>
+    <section class="main-content">
+
+      <h1>Manual of DeepSec</h1>
+
+            <p>The manual of <strong>DeepSec</strong> is also available in <a href="DeepSec-manual.pdf" title="User manual of the DeepSec prover">PDF</a>.</p>
+
+      <section class="page-menu">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="index.html">Introduction</a></li>
+          <li><a href="html/install.html">Installation</a></li>
+          <li><a href="html/tutorial.html">Tutorial</a></li>
+	  <li><a href="html/advanced.html">Advanced options</a></li>
+	  <li><a href="html/gui.html">Graphical User Interface</a></li>
+	  <li><a href="html/command.html">Command-line options</a></li>
+	  <li><a href="html/grammar.html">Input grammar</a></li>
+        </ol>
+        <hr>
+      </section>
+      
+<!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
+<h2 id="introduction">Introduction</h2>
+<p>The <strong>deepsec</strong> prover is a verification tool for cryptographic protocols. It allows the verification of security properties (expressed as a trace equivalence) of protocols described in the applied pi calculus. The tool operates in the so-called “bounded number of sessions” model: while it only allows to specify a fixed number of participants and sessions, termination is always guaranteed (though computational ressources may be exhausted if the model is too large).</p>
+<h3 id="scope-of-this-manual">Scope of this manual</h3>
+<p>This manual provides a “hands-on” introduction on how to use the tool. It will provide intuitive explanations of the language and the properties. It will also explain the different options and prov ide a reference guide for the precise syntax. It will however <em>not</em> give formal semantics nor explain the underlying algorithms. The theory underlying <strong>deepsec</strong> is described in <span class="citation" data-cites="CKR-sp18">[1]</span> and <span class="citation" data-cites="CKR-ccs19">[2]</span>. Some of the implementation choices are also discussed in a tool paper <span class="citation" data-cites="CKR-cav18">[3]</span>.</p>
+<h3 id="support">Support</h3>
+<p>Please report any bugs to <a href="mailto:vincent.cheval@inria.fr"><code>vincent.cheval@inria.fr</code></a> or file an issue on our <a href="https://github.com/DeepSec-prover/deepsec/issues">github</a>.</p>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>The research that led to <strong>deepsec</strong> was primarily supported by ERC under the EU’s H2020 research and innovation program (grant agreements No 645865-SPOOC), as well as from the French ANR projects SEQUOIA ( ANR-14-CE28-0030-01) and TECAP (ANR-17-CE39-0004-01).</p>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-CKR-sp18">
+<p>[1] V. Cheval, S. Kremer, and I. Rakotonirina, “DEEPSEC: Deciding equivalence properties in security protocols - theory and practice,” in <em>Proceedings of the 39th ieee symposium on security and privacy (S&amp;P’18)</em>, 2018.</p>
+</div>
+<div id="ref-CKR-ccs19">
+<p>[2] V. Cheval, S. Kremer, and I. Rakotonirina, “Exploiting symmetries when proving equivalence properties for security protocols,” in <em>Proceedings of the 26th ACM Conference on Computer and Communications Security (CCS’19)</em>, 2019, pp. 905–922.</p>
+</div>
+<div id="ref-CKR-cav18">
+<p>[3] V. Cheval, S. Kremer, and I. Rakotonirina, “The deepsec prover,” in <em>Proceedings of the 30th International Conference on Computer Aided Verification, Part II (CAV’18)</em>, 2018.</p>
+</div>
+</div>
+
+      <hr>
+      <div class="footer-nav">
+        <div class="footer-nav-Body">
+          <div class="footer-nav-Row">
+            <div class="footer-nav-Left">&nbsp;</div>
+            <div class="footer-nav-Mid"><a href="#anchor-top">Top</a></div>
+            <div class="footer-nav-Right"><a href="manual/install.html">Installation&nbsp;&#8594;</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-footer-owner">
+      Authors:
+              <a href="https://members.loria.fr/vcheval">Vincent Cheval</a>
+      ,         <a href="https://members.loria.fr/SKremer">Steve Kremer</a>
+      ,         <a href="https://members.loria.fr/IRakotonirina">Itsaka Rakotonirina</a>
+          </section>
+
+    <section class="site-footer-credits">
+      <img src="logo/inr_logo_eng_rouge.png" width="150px">
+      <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+    </section>
+  </div>
+</body>
