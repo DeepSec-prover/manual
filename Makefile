@@ -40,6 +40,7 @@ html/%.html: src/%.md
 	  -t html -o $@ $<
 
 tex/%.tex: src/%.md
+	mkdir -p tex
 	$(PANDOC) \
 		--top-level-division=chapter\
 	  --bibliography=biblio.bib\
@@ -53,3 +54,4 @@ template/main.tex: template/main.md
 
 clean:
 	-rm -f html/*.html *.html *.tex tex/*.tex template/main.tex
+	-rmdir tex
