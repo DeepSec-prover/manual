@@ -30,7 +30,7 @@
     4. [Verifying private authentication](#verifying-private-authentication)
 
   * **Part 2:** *Verification in practice*
-    1. [More complex scenarios](#more-complex-scenarios-and-scaling-up)
+    1. [More complex scenarios](#more-complex-scenarios)
     2. [Speeding-up the verification](#speeding-up-the-verification)
     3. [The DeepSec User Interface](#the-deepsec-user-interface)
 
