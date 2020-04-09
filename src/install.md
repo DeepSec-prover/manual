@@ -31,7 +31,7 @@ Please install both so that you can test as many features as possible.
 ### Installation of DeepSec
 
 **DeepSec** requires **OCaml > 4.05**.
-It is highly recommended to install **OCaml** through `opam` instead of a native package manager, such as `apt-get` (the latest version on `apt-get may` not be the latest release of OCaml).
+It is highly recommended to install **OCaml** through `opam` instead of a native package manager, such as `apt-get` (the latest version on `apt-get` may not be the latest release of OCaml).
 `opam` itself may however be safely installed using your favorite package manager (see instructions for installing `opam`).
 To know your current version of **OCaml**, just run `ocaml --version`.
 
