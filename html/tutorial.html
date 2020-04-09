@@ -118,6 +118,21 @@
       
 <!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
 <h2 id="tutorial">Tutorial</h2>
+<ul>
+<li><strong>Part 1:</strong> <em>Modelling a protocol and a security property</em>
+<ol type="1">
+<li><a href="#the-private-authentication-protocol">The private authentication protocol (PAP)</a></li>
+<li><a href="#modelling-messages-in-deepsec">Modelling messages in DeepSec</a></li>
+<li><a href="#modelling-protocols-as-processes">Modelling protocols as processes</a></li>
+<li><a href="#verifying-private-authentication">Verifying private authentication</a></li>
+</ol></li>
+<li><strong>Part 2:</strong> <em>Verification in practice</em>
+<ol type="1">
+<li><a href="#more-complex-scenarios-and-scaling-up">More complex scenarios</a></li>
+<li><a href="#speeding-up-the-verification">Speeding-up the verification</a></li>
+<li><a href="#the-deepsec-user-interface">The DeepSec User Interface</a></li>
+</ol></li>
+</ul>
 <h3 id="the-private-authentication-protocol">The Private Authentication Protocol</h3>
 <p>We will now explain protocol verification in <strong>DeepSec</strong> through an example. As <strong>DeepSec</strong> specializes in verifying equivalence properties, mainly used for modelling privacy preserving properties, we will use the <em>Private Authentication Protocol</em> (PAP) as our example <span class="citation" data-cites="AF-tcs04">[1]</span>. The protocol can be described in “Alice &amp; Bob” notation as follows:</p>
 <pre><code>  A -&gt; B: aenc( (Na,pk(skA)), pk(skB) )
@@ -229,7 +244,7 @@
 <p><strong>DeepSec</strong> can take several files as input. For example you may run</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a>  <span class="ex">deepsec</span> pap-1-session.dps pap-1-session-attack.dps</span></code></pre></div>
 </blockquote>
-<h3 id="more-complex-scenarios-and-scaling-up">More complex scenarios and scaling up</h3>
+<h3 id="more-complex-scenarios">More complex scenarios</h3>
 <p>In the previous section we considered a very simple scenario and our verification checked whether private authentication holds when we have one instance of <code>A</code> and <code>B</code>. Often, protocols may be secure when considering a single session, but attacks may arise when multiple sessions are executed in parallel.</p>
 <p>Let us see what happens when we consider two instances of each role resulting into the following declarations.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb18-1"><a href="#cb18-1"></a>  <span class="st">let</span> ProcessAB =</span>
@@ -263,7 +278,8 @@
 <p>While the verification time is still moderate for 2 sessions this is not the case anymore when we add a third session.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a>  $ <span class="ex">deepsec</span> pap-3-session.dps</span></code></pre></div>
 <p>will take <em>much</em> longer. How can we ensure that the protocol cannot be attacked with 3 sessions, or more?</p>
-<h4 id="acceleration-technique-1-distributing-the-computation">Acceleration technique 1: <strong>distributing the computation</strong></h4>
+<h3 id="speeding-up-the-verification">Speeding up the verification</h3>
+<p><strong>Acceleration technique 1:</strong> <em>distributing the computation</em></p>
 <p>A first way to scale up is to distribute the computation. By default, <strong>DeepSec</strong> checks how many physical cores your machine has and distributes the computation on these cores by creating the same amount of <em>workers</em>. To activate the distributed computation with a different number of workers, <code>deepsec</code> should be run with the option <code>-l n</code> (or <code>--local_workers n</code>) where <code>n</code> is the number of desired local workers.</p>
 <p>It is also possible to distribute computation on several machines. To do so, deepsec requires an ssh connexion between the localhost and the distant machine, using ssh key authentication, so that no password is required. The computation on a distant machine is configured with the command line option <code>-w &lt;host&gt; &lt;path&gt; &lt;n&gt;</code> (or <code>--distant_workers &lt;host&gt; &lt;path&gt; &lt;n&gt;</code>). The parameter <code>&lt;host&gt;</code> is the ssh login and address (e.g my_login@my_host). The parameter <code>&lt;path&gt;</code> should indicate the path to the deepsec directory on the distant machine. Finally, the parameter <code>&lt;n&gt;</code> represents the number of cores that should be dedicated by this distant machine to the computation of the input file.</p>
 <p>Note that the option <code>-distant_workers</code> must be used for each distant machine.</p>
@@ -273,7 +289,7 @@
 <blockquote>
 <p><strong><em>Important</em></strong>: The localhost and distant machines must have exactly the same version of <strong>DeepSec</strong> (the Git hash is displayed when running <code>deepsec</code> without parameters or with the option <code>--help</code>), compiled with the same version of <strong>OCaml</strong>.</p>
 </blockquote>
-<h4 id="acceleration-technique-2-session-equivalence">Acceleration technique 2: <strong>session equivalence</strong></h4>
+<p><strong>Acceleration technique 2:</strong> <em>session equivalence</em></p>
 <p>Distribution of the computation may gain a constant speed-up factor: going from a 20 hours computation to a 1 hour computation is indeed much appreciated, but may not solve the more fundamental problem of the exponential blowup.</p>
 <p>This is why <strong>DeepSec</strong> proposes another, more efficient proof technique. The underlying idea is to prove a <em>finer</em> equivalence relation, that we call <em>equivalence by session</em>. This equivalence significantly decreases the number of interleavings by exploiting the <em>structure</em> of the processes. Indeed, often, we want to show the equivalence of processes that are of the form</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb24-1"><a href="#cb24-1"></a>  <span class="st">let</span> P = P1 | ... | Pn</span>
@@ -296,7 +312,7 @@
 <p><strong>Note:</strong> <em>Syntactic restriction</em></p>
 <p>The theory of equivalence by session requires that all channels are only (public or private) names or constants, i.e., no complex terms, nor variables.</p>
 </blockquote>
-<h4 id="acceleration-technique-3-partial-order-reduction-techniques">Acceleration technique 3: <strong>Partial-order reduction techniques</strong></h4>
+<p><strong>Acceleration technique 3:</strong> <em>Partial-order reductions</em></p>
 <p>Probably the most effective way to fight state explosion are partial order reduction (POR) techniques. <strong>Deepsec</strong> implements powerful POR optimisations, that were designed in <span class="citation" data-cites="BDH-concur15">[2]</span> for accelerating the decision of trace equivalence. These techniques are however only sound on a class of <em>action-determinate</em> processes: a process is action determinate when it never can reach a state where two outputs, or two inputs on a same channel are executable. Moreover, the processes may not use <em>private</em> channels. A simple, sufficient criterion is to check that syntactically no outputs on a same channel appear in parallel, and similarly for inputs, and that all channels are public. <strong>Deepsec</strong> automatically checks this criterion, and when satisfied applies POR techniques.</p>
 <p>A pragmatic way to ensure action determinacy is to use a different channel name for each process in parallel. It is easy to modify the specification of PAP in that way. This modelling allows for a spectacular efficiency gain. The verification of a scenario with 9 sessions terminates in a few seconds.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode .bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a>  $ <span class="ex">deepsec</span> pap-por-9-sessions.dps</span></code></pre></div>
