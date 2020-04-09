@@ -589,7 +589,7 @@ Therefore, you should make sure that this executable is in your system path.
 When launching **DeepSec UI** you should arrive at the following welcome screen.
 
 
-[DeepSec UI welcome screen](img/start-run.png "Welcome Screen allowing to load files.")\
+![DeepSec UI welcome screen](img/start-run.png "Welcome Screen allowing to load files.")\
 
 From this screen you can navigate through the 3 main sections of the
 GUI (displayed on the left):
