@@ -310,34 +310,34 @@
 <p><strong>DeepSec</strong> also comes with a graphical user interface (GUI). The GUI is intended to provide an easy to use environment for using <strong>DeepSec</strong>, browsing the results and simulating attacks as well as equivalence proofs.</p>
 <p>The GUI is launched by executing the <strong>DeepSec UI</strong> application. This is a standalone application that communicates with <strong>DeepSec</strong> by making calls to the <strong>deepsec_api</strong> executable. Therefore, you should make sure that this executable is in your system path. (Otherwise we can manually configure the path to <strong>deepsec_api</strong>, see below).</p>
 <p>When launching <strong>DeepSec UI</strong> you should arrive at the following welcome screen.</p>
-<p><img src="img/start-run.png" title="Welcome Screen allowing to load files." alt="DeepSec UI welcome screen" /><br />
+<p><img src="../img/start-run.png" title="Welcome Screen allowing to load files." alt="DeepSec UI welcome screen" /><br />
 </p>
 <p>From this screen you can navigate through the 3 main sections of the GUI (displayed on the left): * Start Run * Results * Settings</p>
 <p>Normally you should see a “pop-up” confirming that <strong>deepsec_api</strong> has been successfully detected. If not you will get a <em>warning</em> pop-up. This notification only appears for a few second. If the executable was not detected you may manually specify the path by clicking on <em>Settings</em> and providing the <em>Absolute Path of deepsec_api</em>.</p>
-<p><img src="img/settings.png" title="Absolute path to deepsec_api can be specified in Settings." alt="Settings" /><br />
+<p><img src="../img/settings.png" title="Absolute path to deepsec_api can be specified in Settings." alt="Settings" /><br />
 </p>
 <p>You may test that the executable is indeed available in the specified path by clicking on <em>Check API</em>.</p>
 <p>We can now navigate back to the <em>Start Run</em> section and select the files with the specifications to be analysed. Let us select the <code>pap-1-session</code> and <code>pap-1-session-attack</code> that we used previously (available in <code>Examples/tutorial/</code> in the <strong>DeepSec</strong> folder). The GUI allows you to select multiple files and such a collection of files is called a <em>batch</em>. Each file of this <em>batch</em> is called a <em>run</em> and such a run may contain multiple <em>queries</em>, as several queries may be specified in a same file.</p>
 <p>In order to reference this batch we may provide a title, e.g. <code>Tutorial</code>. The <code>Start Run</code> section also allows for more advanced settings (<em>Semantics</em>, <em>Distributed</em>), but we currently keep the default settings.</p>
-<p><img src="img/batch.png" title="Files selected for the Tutorial batch." alt="Batch" /><br />
+<p><img src="../img/batch.png" title="Files selected for the Tutorial batch." alt="Batch" /><br />
 </p>
 <p>We can now start the verification by clicking on the <em>Start Batch</em> button. Pop-up windows will notify about the status of the verification.</p>
 <p>Navigating to the results section we now see the list of all previous verifications including the <em>Tutorial</em> batch.</p>
-<p><img src="img/results.png" title="Showing the list of runs and batches." alt="Results" /><br />
+<p><img src="../img/results.png" title="Showing the list of runs and batches." alt="Results" /><br />
 </p>
 <p>Clicking on the tutorial batch we can display additional information. You may inspect the Run options and Versions to see the precise parameters and software versions used to run this batch.</p>
 <p>Clicking on <code>pap-1-session</code> and then <code>Query 1</code> allows to reveal additional information about the individual run and query.</p>
-<p><img src="img/pap-1-sessions-result.png" title="Displaying results of Query 1 of the run pap-1-session." alt="Detailed results of a given run and query" /><br />
+<p><img src="../img/pap-1-sessions-result.png" title="Displaying results of Query 1 of the run pap-1-session." alt="Detailed results of a given run and query" /><br />
 </p>
 <p>We can now inspect the <em>Details</em> of <code>Query 1</code>. The first part of the screen provides a summary of the query, recalling the declarations of the file and showing the result of the verification.</p>
-<p><img src="img/summary-equivalent.png" title="Detailed summary on Query 1." alt="Detailed information on Query 1" /><br />
+<p><img src="../img/summary-equivalent.png" title="Detailed summary on Query 1." alt="Detailed information on Query 1" /><br />
 </p>
 <p>The second part shows the two processes of the query.</p>
-<p><img src="img/processes-equivalent.png" title="Display of the two processes of Query 1." alt="Process display" /><br />
+<p><img src="../img/processes-equivalent.png" title="Display of the two processes of Query 1." alt="Process display" /><br />
 </p>
 <p>We may note that all processes defined by a <code>let ... = ...</code> construct have been inlined. An interesting functionality here is the <em>Equivalence Simulator</em> (click above the processes): it allows to define a trace on one process and have <strong>DeepSec</strong> find the equivalent trace on the other process. “Playing around” with the processes should allow the user to understand <em>why</em> the two processes are equivalent.</p>
 <p>For instance, we could select a trace on Process 1. Available choices are highlighted and the user may select one of them.</p>
-<p><img src="img/equiv-sim.png" title="Select an action in Process 1." alt="Equivalence simulator" /><br />
+<p><img src="../img/equiv-sim.png" title="Select an action in Process 1." alt="Equivalence simulator" /><br />
 </p>
 <p>Initially, a single action <code>out(c,pk(ska));</code> is available and there is no other choice than select this one. This is a direct communication with the attacker on a channel; hence, the attacker needs to provide a <em>recipe</em> to compute this channel name. As here it is a constant <code>c</code> the tool proposes the recipe and we can simply validate. The three first actions do not offer any choice, and we can select the trace</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb29-1"><a href="#cb29-1"></a>  <span class="st">out</span>(c,ax1) · <span class="st">out</span>(c,ax2) · <span class="st">out</span>(c,ax3)</span></code></pre></div>
