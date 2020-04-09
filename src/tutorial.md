@@ -572,7 +572,7 @@ While this works well for the PAP protocol, some protocols precisely rely on thi
 > However, as witnesses by the examples provided so far in this tutorial, proving trace equivalence of determinate processes is significantly faster than proving equivalence by session of two non-determinate processes.
 >
 > Note that combining the two acceleration techniques (i.e. proving the equivalence by session of determinate processes) does not further improve the performances.
-> It is indeed proved in [@CKR-ccs19] that trace equivalence and equivalence by session coincide for determinate processes, and **DeepSec** therefore uses the same algorithm for both equivalences in this case **OR (TO DECIDE)** the algorithm of **DeepSec** for trace equivalence is more performant in this case.
+> It is indeed proved in [@CKR-ccs19] that trace equivalence and equivalence by session coincide for determinate processes, and **DeepSec** therefore uses the same algorithm for both equivalences when determinacy is detected.
 
 
 ### The **DeepSec** User Interface
@@ -589,7 +589,7 @@ Therefore, you should make sure that this executable is in your system path.
 When launching **DeepSec UI** you should arrive at the following welcome screen.
 
 
-![DeepSec UI welcome screen](img/start-run.png "Welcome  Screen  allowing to load files.")\
+[DeepSec UI welcome screen](img/start-run.png "Welcome Screen allowing to load files.")\
 
 From this screen you can navigate through the 3 main sections of the
 GUI (displayed on the left):
@@ -603,8 +603,7 @@ pop-up. This notification only appears for a few second. If the
 executable was not detected you may manually specify the path by
 clicking on _Settings_ and providing the _Absolute Path of deepsec\_api_.
 
-![Settings](img/settings.png "Absolute path to deepsec_api can be
- specified in Settings.")\
+![Settings](img/settings.png "Absolute path to deepsec_api can be specified in Settings.")\
 
 You may test that the executable is indeed available in the specified
 path by clicking on _Check API_.

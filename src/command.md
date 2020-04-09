@@ -27,7 +27,7 @@
 Command-line options of DeepSec.
 
 ```bash
-deepsec [OPTIONS] FILELIST
+  deepsec [OPTIONS] FILELIST
 ```
 
 

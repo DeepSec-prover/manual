@@ -102,4 +102,4 @@ The settings allow to configure the **DeepSecUI** environment.
  * The _Notification_ section allows to configure the behaviour of pop-up windows. One can define the duration a pop-up window appears, which result notifications should be notified (batch, run, query), and define whether warning and error pop-ups should be "sticky", i.e., only disappear after manual removal.
 The behaviour can be tested using the _Test Notifications_ button.
 
- * The _Scan for new batch_ button allows to scan for batches and runs that were run using the command line. These runs are then added to the list of batches in the _Results_ section. When the `--title` option is used with the [command line](#commad), the provided title will be used in the list.
+ * The _Scan for new batch_ button allows to scan for batches and runs that were run using the command line. These runs are then added to the list of batches in the _Results_ section. When the `--title` option is used with the [command line](#command), the provided title will be used in the list.

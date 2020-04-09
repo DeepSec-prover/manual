@@ -2,7 +2,7 @@
 PANDOC = pandoc --syntax-definition deepsec.xml
 IFORMAT = markdown
 # FLAGS = --standalone --toc --toc-depth=2 --mathjax=$(MATHJAX)
-FLAGS = --standalone --mathjax=$(MATHJAX) 
+FLAGS = --standalone --mathjax=$(MATHJAX)
 # STYLE = style.css
 
 ifdef MATHJAX_LOCAL
@@ -14,8 +14,8 @@ endif
 TEMPLATE_HTML = template/template.html
 TEMPLATE_LATEX = template/template.tex
 
-SRC = $(sort $(wildcard src/*.md)) 
-SRCPDF = tex/manual.tex tex/install.tex tex/tutorial.tex tex/advanced.tex tex/gui.tex tex/grammar.tex tex/command.tex template/main.tex 
+SRC = $(sort $(wildcard src/*.md))
+SRCPDF = tex/manual.tex tex/install.tex tex/tutorial.tex tex/advanced.tex tex/gui.tex tex/grammar.tex tex/command.tex template/main.tex
 SRCHTML = html/manual.html html/install.html html/tutorial.html html/advanced.html html/gui.html html/grammar.html html/command.html
 
 
