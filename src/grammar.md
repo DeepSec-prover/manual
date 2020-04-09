@@ -16,7 +16,7 @@
   navigation: true
 
   prev_page: Command line options
-  prev_page_url: manual/command.html
+  prev_page_url: html/command.html
 ---
 
 ## Language reference
@@ -75,7 +75,7 @@ A file is a sequence of declarations (\<decl\>), process definitions
 
 
 | \<process\> ::= `0`
-|                | \< ident\>`(`seq \<term\>`)` 
+|                | \< ident\>`(`seq \<term\>`)`
 |                | \<process\> `|` \<process\>
 |                | `!^`\<int\> \< process\>
 |                | `(`\<process\>`)`
@@ -102,4 +102,3 @@ We allow 3 types of comments:
  * all text following `//` on a given line is commented;
  * all text between `/*` and `*/` is commented;
  * all text between `(*` and `*)` is commented.
-

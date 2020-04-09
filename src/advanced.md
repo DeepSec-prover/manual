@@ -16,31 +16,41 @@
   navigation: true
 
   next_page: The Graphical User Interface
-  next_page_url: manual/gui.html
+  next_page_url: html/gui.html
   prev_page: Tutorial
-  prev_page_url: manual/tutorial.html
+  prev_page_url: html/tutorial.html
 ---
 
 
 ## Advanced options {#advanced}
 
-**Deepsec** provides a number of _advanced_ options which require a bit more understanding of the semantics and inner working of **deepsec**. Below we give a slightly more in-depth explanation and pointers to relevant papers.
+**DeepSec** provides a number of _advanced_ options which require a bit more understanding of the semantics and inner working of **deepsec**.
+Below we give a slightly more in-depth explanation and pointers to relevant papers.
 
 
 ### Partial Order Reductions {#por}
 
 
-Partial Order Reductions (POR) are a technique to battle state explosion. Given that the number of interleavings of parallel processes is exponential, POR techniques try to avoid the need to explore _all_ interleavings. For example, given actions $a, b, c, d$, sometimes the interleavings $a b c d$ and $a c b d$ may be completely equivalent in the sense that neither of them increases the attacker's power to distinguish. One may think of this as a _partial order_: we need to consider all interleavings such that
-$a$ < $b,c$ <$d$ where < is the precedence relation, but $b$ and $c$ are not ordered. POR techniques then only explore one representative of each class of equivalent interleavings.
+As explained in the tutorial, Partial Order Reductions (POR) are a technique to battle state explosion.
+Given that the number of interleavings of parallel processes is exponential, POR techniques try to avoid the need to explore _all_ interleavings.
+For example, given actions $a, b, c, d$, sometimes the interleavings $a b c d$ and $a c b d$ may be completely equivalent in the sense that neither of them increases the attacker's power to distinguish.
+One may think of this as a _partial order_: we need to consider all interleavings such that $a$ < $b,c$ <$d$ where < is the precedence relation, but $b$ and $c$ are not ordered.
+POR techniques then only explore one representative of each class of equivalent interleavings.
 
-*Deepsec* implements the POR techniques presented in [@BDH-concur15]. The techniques are correct for a class of _action determinate_ processes. *Deepsec* checks a slightly stronger, syntactic condition: there are no two parallel processes that have two outputs, respectively inputs, on the same channel, and all channels are public.
+**DeepSec** implements the POR techniques presented in [@BDH-concur15].
+The techniques are correct for a class of _action determinate_ processes, at least regarding trace equivalence (they are correct for all processes when proving equivalence by session [@CKR-ccs19]).
+Rather than checking determinacy directly, *DeepSec* checks a slightly stronger, syntactic condition: there should not be two parallel processes that have two outputs, respectively inputs, on the same channel, and all channels are public.
 
-By default, the POR optimization is activated automatically whenever this syntactic condition is satisfied. One can manually disable the POR optimization, using either the command line or the graphical user interface. Note that even if POR is set manually to true, it does not change the behavior of non determinate processes in order to guarantee soundness of the result.
+By default, the POR optimisation is activated automatically whenever this syntactic condition is satisfied.
+One can manually disable the POR optimization, using either the command line or the graphical user interface.
+Note that even if POR is set manually to true, it does not change the behavior of non determinate processes in order to guarantee soundness of the result.
 
 
 ### Choosing the semantics {#semantics}
 
-The applied pi calculus comes with formal semantics under the form of a _transition relation_ between processes [@ABF-jacm18]. Minor, apparently insignificant variants have been considered in the literature. In [@BCK-jcs20], typical small variants of the semantics of public communications, occurring in the literature, are studied and 3 different semantics are considered:
+The applied pi calculus comes with formal semantics under the form of a _transition relation_ between processes [@ABF-jacm18].
+Minor, apparently insignificant variants have been considered in the literature.
+In [@BCK-jcs20], typical small variants of the semantics of public communications, occurring in the literature, are studied and 3 different semantics are considered:
 
  * the classic semantics,
  * the private semantics, and the
@@ -49,7 +59,7 @@ The applied pi calculus comes with formal semantics under the form of a _transit
 We will explain the difference between these semantics on an example.
 
 ```{.deepsec}
-let P = out(c,t).P1 | in(c,x).P2
+  let P = out(c,t).P1 | in(c,x).P2
 ```
 We suppose that `c` is a public name, i.e., the channel is known to the adversary.
 
@@ -74,17 +84,16 @@ Whenever trace equivalence holds in the eavesdrop semantics it also holds in bot
 
 
 
-It was also shown in [@BCK-jcs20] that trace equivalence coincides on all three semantics for the class of strongly determinate processes, that is the class on which **deepsec** enables POR techniques. The default semantics of **deepsec** are the private semantics which yield more efficient verification. The semantics can be modified using either the command line or the graphical user interface.
-
+It was also shown in [@BCK-jcs20] that trace equivalence coincides on all three semantics for the class of strongly determinate processes, that is the class on which **DeepSec** enables POR techniques. The default semantics of **DeepSec** are the private semantics which yield more efficient verification. The semantics can be modified using either the command line or the graphical user interface.
 
 
 
 ### Distributing the computation {#distributed}
 
 
-**Deepsec** allows to distribute the computation on multiple cores, as well as on multiple servers. To explain the distribution we need to give a high-level overview on how **deepsec** verifies trace equivalence.
+**DeepSec** allows to distribute the computation on multiple cores, as well as on multiple servers. To explain the distribution we need to give a high-level overview on how **DeepSec** verifies trace equivalence.
 
-To check trace equivalence **deepsec** needs to compute a large symbolic execution tree, called the _partition tree_: each path in this tree corresponds to a symbolic trace, i.e. a trace that may contain non instantiated variables. Each node in the tree regroups the set of equivalent, symbolic processes, after the execution of the symbolic trace leading to this node. Checking trace equivalence between processes `P` and `Q` then consists in verifying that each node contains at least one process derived from `P` and one derived from `Q`.
+To check trace equivalence **DeepSec** needs to compute a large symbolic execution tree, called the _partition tree_: each path in this tree corresponds to a symbolic trace, i.e. a trace that may contain non instantiated variables. Each node in the tree regroups the set of equivalent, symbolic processes, after the execution of the symbolic trace leading to this node. Checking trace equivalence between processes `P` and `Q` then consists in verifying that each node contains at least one process derived from `P` and one derived from `Q`.
 
 The main idea of the distribution is to let different cores explore different branches of the tree.
 
@@ -101,6 +110,3 @@ The [command line](#command-distributed) and graphical user interface allow to s
 * the number of local and remote workers -- when set to 'auto' all available, physical cores are used;
 * the minimum number of jobs created in the job creation phase -- when set to 'auto' the number of jobs is 100 $\times$ the total number of workers;
 * the round timer -- the default value is 120 seconds.
-
-
-

@@ -16,15 +16,16 @@
   navigation: true
 
   next_page: Command line options
-  next_page_url: manual/command.html
+  next_page_url: html/command.html
   prev_page: Advanced Options
-  prev_page_url: manual/advanced.html
+  prev_page_url: html/advanced.html
 ---
 
 ## The graphical User Interface
 
 
-**Deepsec** comes with a Graphical User Interface (GUI). **DeepSecUI** is a standalone application that interacts with the `deepsec_api` executable.
+**DeepSec** comes with a Graphical User Interface (GUI).
+**DeepSecUI** is a standalone application that interacts with the `deepsec_api` executable.
 
 When launching the application you should see a pop-up message stating  _"DeepSec API version x.y.z successfully detected"_. This means that **DeepSecUI** was able to successfully locate the `deepsec_api` executable. If you see a message _"DeepSec API path is not set"_ you must either add the path to your executable in your system PATH, or manually indicate _Absolute Path of deepsec_api_ in the _Settings_.
 
@@ -74,7 +75,7 @@ It also displays the processes on which the verification was run and provides an
 
 
 Selecting the actions requires a few additional explanations:
- 
+
  * The user may select the level of details of the actions: `Default`, `I/O`, and `All`. When `I/O` is selected, only inputs and outputs are shown; internal $\tau$ actions are executed tacitly. When `All` is selected, the user also explicitly executes internal actions. `Default` is an intermediate choice where some internal actions are executed automatically, while others need to be selected explicitly. The `I/O` option is only available in case of an attack, not for an equivalence proof.
 
 
@@ -100,7 +101,5 @@ The settings allow to configure the **DeepSecUI** environment.
 
  * The _Notification_ section allows to configure the behaviour of pop-up windows. One can define the duration a pop-up window appears, which result notifications should be notified (batch, run, query), and define whether warning and error pop-ups should be "sticky", i.e., only disappear after manual removal.
 The behaviour can be tested using the _Test Notifications_ button.
- 
+
  * The _Scan for new batch_ button allows to scan for batches and runs that were run using the command line. These runs are then added to the list of batches in the _Results_ section. When the `--title` option is used with the [command line](#commad), the provided title will be used in the list.
-
-

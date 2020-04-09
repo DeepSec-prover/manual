@@ -17,9 +17,9 @@
   navigation: true
 
   next_page: Language reference
-  next_page_url: manual/grammar.html
+  next_page_url: html/grammar.html
   prev_page: The graphical User Interface
-  prev_page_url: manual/gui.html
+  prev_page_url: html/gui.html
 ---
 
 ## Command-line options
@@ -39,7 +39,7 @@ deepsec [OPTIONS] FILELIST
 >	Specify the default semantics of the process calculus. VALUE must
 >	be one of 'private', 'classic' or 'eavesdrop'. See Section
 >	[_Choosing the semantics_](#semantics) for detailed explanations.
-        
+
 
 
     -p, --por BOOL (default=true)
@@ -131,4 +131,3 @@ deepsec [OPTIONS] FILELIST
 > Sets the round timer to INT seconds. See Section
 > [_Distributing the computation_](#distributed) for detailed
 > explanations.
-
