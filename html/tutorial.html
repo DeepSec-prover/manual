@@ -312,7 +312,12 @@
 <p>When launching <strong>DeepSec UI</strong> you should arrive at the following welcome screen.</p>
 <p><img src="../img/start-run.png" title="Welcome Screen allowing to load files." alt="DeepSec UI welcome screen" /><br />
 </p>
-<p>From this screen you can navigate through the 3 main sections of the GUI (displayed on the left): * Start Run * Results * Settings</p>
+<p>From this screen you can navigate through the 3 main sections of the GUI (displayed on the left):</p>
+<ul>
+<li>Start Run</li>
+<li>Results</li>
+<li>Settings</li>
+</ul>
 <p>Normally you should see a “pop-up” confirming that <strong>deepsec_api</strong> has been successfully detected. If not you will get a <em>warning</em> pop-up. This notification only appears for a few second. If the executable was not detected you may manually specify the path by clicking on <em>Settings</em> and providing the <em>Absolute Path of deepsec_api</em>.</p>
 <p><img src="../img/settings.png" title="Absolute path to deepsec_api can be specified in Settings." alt="Settings" /><br />
 </p>
@@ -348,6 +353,20 @@
 <p>You may also try to see what happens if you use a different recipe for <code>in(c,yb)</code>:</p>
 <pre><code>  aenc((#n,ax_1),ax_2)</code></pre>
 <p>In this recipe the attacker encrypts himself a fresh name <code>#n</code> of his own (fresh names are prefixed by <code>#</code>) and <code>pk(a)</code> (specified by <code>ax_1</code>) with the <code>pk(c)</code> (specified by <code>ax_3</code>). While this results in the same message as <code>ax_4</code> <code>aenc((yna,nb,pk(skb)),pk(ska))</code> in process 1 this is not the case in process 2. Indeed, when requesting to vind an equivalent trace we see that process 2 will move into the <code>else</code> branch and send the decoy message <code>aenc(nb,pk(skb))</code>. Nevertheless, the two resulting frames are statically equivalent.</p>
+<p>We can now navigate to the <code>pap-1-session-attack</code> run and inspect the details og to <code>Query 1</code>. This time the tool tells us it found an attack.</p>
+<p><img src="../img/summary-attack.png" title="Detailed summary of the attack on the simplified PAP." alt="Detailed information on Query 1" /><br />
+</p>
+<p>In particular we see that <strong>deepsec</strong> found the following trace in process 2</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode deepsec"><code class="sourceCode deepsec"><span id="cb32-1"><a href="#cb32-1"></a>   <span class="st">out</span>(c, ax1); <span class="st">out</span>(c,ax2); <span class="st">out</span>(c,ax3); <span class="st">out</span>(c,a42); <span class="st">in</span>(c, aenc((#n0,ax3),ax2)); <span class="st">out</span>(c,ax5)</span></code></pre></div>
+<p>that cannot be matched with an equivalent trace in process 1. The tool proposes to allows to explore this trace in more detail by selecting <em>Attack Trace</em>.</p>
+<p><img src="../img/attack-trace.png" title="Attack trace on the simplified PAP." alt="Attack trace" /><br />
+</p>
+<p>Using the <code>&lt;&lt;</code>, <code>&lt; Prev</code>, <code>Next &gt;</code> and <code>&gt;&gt;</code> buttons you may walk through the attack trace. Note that some of the actions, such as <code>new na</code> and <code>out(c,aenc((na,pk(skc)),pk(skb)));</code> are packed together. As the <code>new na</code> is not observable by the attacker the <code>Default</code> option is to always execute it with the next visible action. By selecting <code>All</code> you may choose to execute each action individually, and on the contrary selecting <code>I/O</code> directly moves to the next input or output. The <code>Default</code> option is a compromise between executing all actions and moving directly to the next io.</p>
+<p>We may also interact more interactively with this attack trace by selecting the <em>Attack Simulator</em>. This allows us to manually try to simulate the attack trace from process 1 on process 2, and convince ourselves that no equivalent trace exists.</p>
+<p>Of course the simulator only allows us to select actions that follow the attack trace. On this example we indeed end up in a situation where the last output of the trace of process 2 is not possible anymore on process 1. Recall that in the original PAP this output is simulated by the decoy message.</p>
+<p><img src="../img/attack-sim.png" title="Attack simulator on the simplified PAP." alt="Attack trace" /><br />
+</p>
+<p>On other examples, some attacks may lead to frames that are not equivalent. In that case the tool also provides a witness on how the frames can be distinguished.</p>
 <div id="refs" class="references" role="doc-bibliography">
 <div id="ref-AF-tcs04">
 <p>[1] M. Abadi and C. Fournet, “Private authentication,” <em>Theor. Comput. Sci.</em>, vol. 322, no. 3, pp. 427–476, 2004.</p>

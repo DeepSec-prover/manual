@@ -593,9 +593,10 @@ When launching **DeepSec UI** you should arrive at the following welcome screen.
 
 From this screen you can navigate through the 3 main sections of the
 GUI (displayed on the left):
-* Start Run
-* Results
-* Settings
+
+ * Start Run
+ * Results
+ * Settings
 
 Normally you should see a "pop-up" confirming that  **deepsec_api**
 has been successfully detected. If not you will get a _warning_
@@ -710,3 +711,53 @@ the same message as `ax_4` `aenc((yna,nb,pk(skb)),pk(ska))` in process
 an equivalent trace we see that process 2 will move into the `else`
 branch and send the decoy message `aenc(nb,pk(skb))`. Nevertheless,
 the two resulting frames are statically equivalent.
+
+
+We can now navigate to the `pap-1-session-attack` run and inspect the
+details og to `Query 1`. This time the tool tells us it found an
+attack.
+
+![Detailed information on Query 1](../img/summary-attack.png "Detailed summary of the attack on the simplified PAP.")\
+
+In particular we see that **deepsec** found the following trace in
+process 2
+
+```{.deepsec}
+   out(c, ax1); out(c,ax2); out(c,ax3); out(c,a42); in(c, aenc((#n0,ax3),ax2)); out(c,ax5)
+```
+
+
+
+that cannot be matched with an equivalent trace in process 1. The tool
+proposes to allows to explore this trace in more detail by selecting
+_Attack Trace_.
+
+![Attack trace](../img/attack-trace.png "Attack trace on the simplified PAP.")\
+
+Using the `<<`, `< Prev`, `Next >` and `>>` buttons you may walk
+through the attack trace. Note that some of the actions, such as `new
+na` and `out(c,aenc((na,pk(skc)),pk(skb)));` are packed together. As
+the `new na` is not observable by the attacker the `Default` option is
+to always execute it with the next visible action. By selecting `All`
+you may choose to execute each action individually, and on the
+contrary selecting `I/O` directly moves to the next input or
+output. The `Default` option is a compromise between executing all
+actions and moving directly to the next io.
+
+We may also interact more interactively with this attack trace by
+selecting the _Attack Simulator_. This allows us to manually try to
+simulate the attack trace from process 1 on process 2, and convince 
+ourselves that no equivalent trace exists.
+
+Of course the simulator only allows us to select actions that follow
+the attack trace. On this example we indeed end up in a situation
+where the last output of the trace of process 2 is not possible
+anymore on process 1. Recall that in the original PAP this output is
+simulated by the decoy message.
+
+![Attack trace](../img/attack-sim.png "Attack simulator on the simplified PAP.")\
+
+On other examples, some attacks may lead to frames that are not
+equivalent. In that case the tool also provides a witness on how the
+frames can be distinguished.
+
