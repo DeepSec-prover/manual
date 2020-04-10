@@ -257,7 +257,7 @@ branches, which is why the above syntactic sugar is often convenient.
 > tuple.
 
 
-Finally, we put all the pieces together ia main process `ProcessAB`
+Finally, we put all the pieces together in main process `ProcessAB`
 modelling the entire system.
 
 ```{.deepsec}
