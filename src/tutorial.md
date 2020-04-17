@@ -459,7 +459,7 @@ deepsec -w login1@host1 tools/deepsec 15 \
 In this command line, the first machine should be accessible with `ssh
 login1@host1` and the **deepsec** directory should be located at
 `~/tools/deepsec` on this machine. Similarly, the second machine
-should be accessible with `ssh login2@host1` and the **DeepSec**
+should be accessible with `ssh login2@host2` and the **DeepSec**
 directory should be located at `~/deepsec`. If the connexions to both
 machines are successful, **DeepSec** will distribute the computation
 between the local and the 2 distant machines: 15 cores are used on the
@@ -705,12 +705,13 @@ You may also try to see what happens if you use a different recipe for
 
 In this recipe the attacker encrypts himself a fresh name `#n` of his
 own (fresh names are prefixed by `#`) and `pk(a)` (specified by
-`ax_1`) with the `pk(c)` (specified by `ax_3`). While this results in
-the same message as `ax_4` `aenc((yna,nb,pk(skb)),pk(ska))` in process
-1 this is not the case in process 2. Indeed, when requesting to vind
-an equivalent trace we see that process 2 will move into the `else`
-branch and send the decoy message `aenc(nb,pk(skb))`. Nevertheless,
-the two resulting frames are statically equivalent.
+`ax_1`) with `pk(b)` (specified by `ax_2`). While this results in the
+same message (up to the nonce) as `ax_4`, i.e.,
+`aenc((na,pk(ska)),pk(skb))`, in process 1 this is not the case in
+process 2. Indeed, when requesting to find an equivalent trace we see
+that process 2 will move into the `else` branch and send the decoy
+message `aenc(nb,pk(skb))`. Nevertheless, the two resulting frames are
+statically equivalent.
 
 
 We can now navigate to the `pap-1-session-attack` run and inspect the
