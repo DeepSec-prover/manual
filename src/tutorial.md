@@ -23,6 +23,16 @@
 
 ## Tutorial
 
+  * **Part 1:** *Modelling a protocol and a security property*
+    1. [The private authentication protocol (PAP)](#the-private-authentication-protocol)
+    2. [Modelling messages in DeepSec](#modelling-messages-in-deepsec)
+    3. [Modelling protocols as processes](#modelling-protocols-as-processes)
+    4. [Verifying private authentication](#verifying-private-authentication)
+
+  * **Part 2:** *Verification in practice*
+    1. [More complex scenarios](#more-complex-scenarios)
+    2. [Speeding-up the verification](#speeding-up-the-verification)
+    3. [The DeepSec User Interface](#the-deepsec-user-interface)
 
 ### The Private Authentication Protocol
 
@@ -347,7 +357,7 @@ reply.
 > ```
 
 
-### More complex scenarios and scaling up
+### More complex scenarios
 
 
 In the previous section we considered a very simple scenario and
@@ -426,7 +436,9 @@ not the case anymore when we add a third session.
 will take _much_ longer. How can we ensure that the protocol cannot be
 attacked with 3 sessions, or more?
 
-#### Acceleration technique 1: **distributing the computation**
+### Speeding up the verification
+
+**Acceleration technique 1:** *distributing the computation*
 
 A first way to scale up is to distribute the computation.  By default,
 **DeepSec** checks how many physical cores your machine has and
@@ -472,7 +484,7 @@ on the second machine.
 > `--help`), compiled with the same version of **OCaml**.
 
 
-#### Acceleration technique 2: **session equivalence**
+**Acceleration technique 2:** *session equivalence*
 
 Distribution of the computation may gain a constant speed-up factor:
 going from a 20 hours computation to a 1 hour computation is indeed
@@ -539,7 +551,7 @@ Distributing this computation could of course improve further the verification t
 
 
 
-#### Acceleration technique 3: **Partial-order reduction techniques**
+**Acceleration technique 3:** *Partial-order reductions*
 
 Probably the most effective way to fight state explosion are partial
 order reduction (POR) techniques.
@@ -747,7 +759,7 @@ actions and moving directly to the next io.
 
 We may also interact more interactively with this attack trace by
 selecting the _Attack Simulator_. This allows us to manually try to
-simulate the attack trace from process 1 on process 2, and convince 
+simulate the attack trace from process 1 on process 2, and convince
 ourselves that no equivalent trace exists.
 
 Of course the simulator only allows us to select actions that follow
@@ -761,4 +773,3 @@ simulated by the decoy message.
 On other examples, some attacks may lead to frames that are not
 equivalent. In that case the tool also provides a witness on how the
 frames can be distinguished.
-
