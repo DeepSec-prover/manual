@@ -65,8 +65,8 @@ Command-line options of DeepSec.
 
     --trace
 
->   When an attack is found, display the full trace with the execution of the process.
->   Incompatible with --quiet. **Not implemented yet**.
+>   When an attack is found, display the attack trace.
+>   Incompatible with --quiet.
 
 
     -h, -help, --help
