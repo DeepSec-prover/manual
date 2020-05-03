@@ -56,26 +56,35 @@
       
 <!-- do not indent this line, may cause indentation problems in fenced code blocks! -->
 <h2 id="download-and-installation">Download and installation</h2>
-<p>In this section we will guide you through the installation of the <strong>DeepSec</strong> prover and its graphical user interface <strong>DeepSec UI</strong>. <strong>DeepSec</strong> can be used independently of <strong>DeepSec UI</strong> but the latter requires the former to be installed. Please install both so that you can test as many features as possible.</p>
-<h2 id="install-the-deepsec-prover">Install the DeepSec Prover</h2>
-<p><strong>DeepSec</strong> requires <strong>OCaml &gt;= 4.05</strong>. It is highly recommended to install <strong>OCaml</strong> through <code>opam</code> instead of a native package manager, such as <code>apt-get</code> (the latest version on <code>apt-get</code> may not be the latest release of OCaml). <code>opam</code> itself may however be safely installed using your favorite package manager (see <a href="https://opam.ocaml.org/doc/Install.html">instructions for installing <code>opam</code></a>). To know your current version of <strong>OCaml</strong>, just run <code>ocaml --version</code>; if it is older than 4.05 follow the following instructions:</p>
-<p><em>Upgrading Ocaml using OPAM 1.x.x</em></p>
+<p>In this section we will guide you through the installation of the <strong>DeepSec</strong> prover and its graphical user interface <strong>DeepSec UI</strong>. <strong>DeepSec</strong> can be used independently of <strong>DeepSec UI</strong> but the latter requires the former to be installed.<br />
+Please install both so that you can test as many features as possible.</p>
+<h3 id="installation-of-deepsec">Installation of DeepSec</h3>
+<p><strong>DeepSec</strong> requires <strong>OCaml &gt; 4.05</strong>. It is highly recommended to install <strong>OCaml</strong> through <code>opam</code> instead of a native package manager, such as <code>apt-get</code> (the latest version on <code>apt-get</code> may not be the latest release of OCaml). <code>opam</code> itself may however be safely installed using your favorite package manager (see instructions for installing <code>opam</code>). To know your current version of <strong>OCaml</strong>, just run <code>ocaml --version</code>.</p>
+<h3 id="upgrading-ocaml-using-opam-1.x.x-can-be-skipped-if-you-already-have-ocaml-4.05-or-later">Upgrading OCaml using OPAM 1.x.x (Can be skipped if you already have ocaml 4.05 or later)</h3>
 <ol type="1">
 <li>Run <code>opam switch list</code> (The version 4.05.0 should be displayed in the list. Otherwise run first <code>opam update</code>).</li>
 <li>Run <code>opam switch 4.05.0</code> (or a more recent version).</li>
 <li>Follow the instructions (at the end do not forget to set the environment by running <code>eval `opam config env`</code>).</li>
 </ol>
-<p><em>Upgrading Ocaml using OPAM 2.x.x</em></p>
+<h3 id="upgrading-ocaml-using-opam-2.x.x-can-be-skipped-if-you-already-have-ocaml-4.05-or-later">Upgrading OCaml using OPAM 2.x.x (Can be skipped if you already have ocaml 4.05 or later)</h3>
 <ol type="1">
 <li>Run <code>opam switch list-available</code> (The version <code>ocaml-base-compiler 4.05.0</code> should be displayed in the list. Otherwise, first run <code>opam update</code>).</li>
 <li>Run <code>opam switch create 4.05.0</code> (or a more recent version).</li>
 <li>Follow the instructions.</li>
 </ol>
-<p>When <strong>Ocaml</strong> is up to date you can conclude the installation by simply running</p>
-<pre><code>opam install deepsec</code></pre>
-<p>This will install a command line <code>deepsec</code> whose typical usage is <code>deepsec file.dps</code> where <code>file.dps</code> is the file describing the equivalence property to be verified (see the <a href="tutorial.html">Tutorial</a> for details).</p>
-<h2 id="install-the-deepsec-ui">Install the DeepSec UI</h2>
-<p><strong>DeepSec UI</strong> has been packaged so you don’t need to compile it from the source. Just download below the version according to your OS and double click. You can also directly visit <a href="https://github.com/DeepSec-prover/deepsec_ui/releases">DeepSec UI Releases</a> to get the lastest version. Feel free to ask if you need an other distribution (however currently no Windows support…)</p>
+<h3 id="installation-of-deepsec-from-source">Installation of DeepSec from source</h3>
+<p><strong>DeepSec</strong> requires the package <strong>ocamlbuild</strong> to compile which itself requires <strong>ocamlfind</strong>. It is important that both ocamlbuild and ocamlfind are compiled with the same version of OCaml. Running <code>opam install ocamlbuild</code> may not install ocamlfind if an instance of ocamlfind was installed on a different installation of OCaml (which sometimes happen on MacOSX). It is safer to run <code>opam install ocamlfind</code> before. We plan to provide an <code>opam</code> package for <strong>DeepSec</strong> to ease the installation.</p>
+<p><strong>Summary:</strong></p>
+<ol type="1">
+<li>Run <code>opam install ocamlfind</code> <em>(Optional if already installed)</em></li>
+<li>Run <code>opam install ocamlbuild</code> <em>(Optional if already installed)</em></li>
+<li>Run <code>git clone https://github.com/DeepSec-prover/deepsec.git</code> (with a HTTPS connexion) or <code>git clone git@github.com:DeepSec-prover/deepsec.git</code> (with a SSH connexion)</li>
+<li>Inside the directory <code>deepsec</code>, run <code>make</code></li>
+<li>The executable program <code>deepsec</code> has been built.</li>
+</ol>
+<p>Note that two additional executables are compiled at the same time as <code>deepsec</code>: <code>deepsec_worker</code> and <code>deepsec_api</code>. The former is used by <strong>DeepSec</strong> to distribute the computation on multi-core architectures and clusters of computers. The latter is used to communicate with <strong>DeepSec UI</strong>. <em>They should not be used manually nor should they be moved from the <code>deepsec</code> folder.</em></p>
+<h3 id="installation-of-deepsec-ui">Installation of DeepSec UI</h3>
+<p><strong>DeepSec UI</strong> has been packaged so you don’t need to compile it from the source. Just download the version according to your OS and double click. You can also directly visit <a href="https://github.com/DeepSec-prover/deepsec_ui/releases">DeepSec UI Releases</a> to get the lastest version. If you need another distribution, please feel free to ask (currently no windows support…)</p>
 <ol type="1">
 <li>For MacOSX: <a href="https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc3/deepsec-ui-1.0.0-rc3_OSX.dmg">deepsec-ui-1.0.0-rc3_OSX.dmg</a></li>
 <li>For Linux:</li>
@@ -85,20 +94,9 @@
 <li>Snapshot: <a href="https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc3/deepsec-ui-1.0.0-rc3_amd64.snap">deepsec-ui-1.0.0-rc3_amd64.snap</a></li>
 <li>AppImage: <a href="https://github.com/DeepSec-prover/deepsec_ui/releases/download/v1.0.0-rc3/deepsec-ui-1.0.0-rc3.AppImage">deepsec-ui-1.0.0-rc3.AppImage</a></li>
 </ul>
-<h2 id="install-editor-modes">Install Editor modes</h2>
-<p>A dedicated package for syntax highlighting, <code>language-deepsec</code>, is available for installation within the package manager of the <code>atom</code> editor. Given that the <strong>DeepSec</strong> input language is very close to the one used by the <strong>ProVerif</strong> verification tool you may use the proverif mode (<code>proverif-pi-mode</code>) for <code>emacs</code> distributed with <a href="https://proverif.inria.fr">ProVerif</a>.</p>
-<h2 id="other-method-install-the-deepsec-prover-from-source">Other method: Install the DeepSec Prover from source</h2>
-<p><strong>DeepSec</strong> requires the package <strong>ocamlbuild</strong> to compile which itself requires <strong>ocamlfind</strong>. It is important that both ocamlbuild and ocamlfind are compiled with the same version of OCaml. Running <code>opam install ocamlbuild</code> may not install ocamlfind if an instance of ocamlfind was installed on a different installation of OCaml (which sometimes happen on MacOSX). It is safer to run <code>opam install ocamlfind</code> before. <!-- We plan to provide an `opam` package for **DeepSec** to ease the installation. --></p>
-<p><strong>Summary:</strong></p>
-<ol type="1">
-<li>Run <code>opam install ocamlfind</code> <em>(Optional if already installed)</em></li>
-<li>Run <code>opam install ocamlbuild</code> <em>(Optional if already installed)</em></li>
-<li>Run <code>git clone https://github.com/DeepSec-prover/deepsec.git</code> (with a HTTPS connexion) or <code>git clone git@github.com:DeepSec-prover/deepsec.git</code> (with a SSH connexion)</li>
-<li>Inside the directory <code>deepsec</code>, run <code>make</code></li>
-<li>The executable program <code>deepsec</code> has been built.</li>
-<li>[necessary for DeepSec UI] add the path to the <code>deepsec_api</code> executable generated during the installation to your <code>PATH</code> (or you can manually indicate where it is located in the <strong>Settings</strong> menu of <strong>DeepSec UI</strong>)</li>
-</ol>
-<p>Note that two additional executables are compiled at the same time as <code>deepsec</code>: <code>deepsec_worker</code> and <code>deepsec_api</code>. The former is used by <strong>DeepSec</strong> to distribute the computation on multi-core architectures and clusters of computers. The latter is used to communicate with <strong>DeepSec UI</strong>. <em>They should not be used manually nor should they be moved from the <code>deepsec</code> folder.</em></p>
+<p>To work, <strong>DeepSec UI</strong> requires to know the location of the executable <code>deepsec_api</code> that was installed by <strong>DeepSec</strong>. When <strong>DeepSec</strong> will be installed through <code>opam</code> in the foreseeable future, it will be added in your <code>PATH</code> environment automatically and so <strong>DeepSec UI</strong> will find it automatically. Thus currently, either you can add <code>deepsec_api</code> in your <code>PATH</code> or you can manually indicate to <strong>DeepSec UI</strong> where it is located (in the <strong>Settings</strong> menu of <strong>DeepSec UI</strong>).</p>
+<h3 id="editor-modes">Editor modes</h3>
+<p>A dedicated package for syntax highlighting, <code>language-deepsec</code>, is available for installation within <code>atom</code>. Given that the <strong>DeepSec</strong> input language is very close to the one used by the <strong>ProVerif</strong> verification tool you may use the proverif mode (<code>proverif-pi-mode</code>) for <code>emacs</code> distributed with <a href="https://proverif.inria.fr">ProVerif</a>.</p>
 <!-- Written by Steve -->
 
       <hr>
