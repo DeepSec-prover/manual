@@ -63,10 +63,8 @@ file
   Examples/tutorial/pap-1-session.dps
 ```
 
-in the **deepsec** directory.
-We suggest that you move to that
-directory and make sure that the **deepsec** executable is in your
-path.
+in the **deepsec** [repository](https://github.com/DeepSec-prover/deepsec).
+We suggest that you download/clone this repository and move to the `Examples/tutorial/` directory to experiment during this tutorial.
 
 
 ### Modelling messages in **DeepSec**
